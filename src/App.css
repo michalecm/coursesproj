@@ -1,38 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
 .App {
-  text-align: center;
+  padding-top: 25px;
+  margin-left: 13vw;
+  margin-right: 13vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  border: 2px solid purple;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 25px;
+  vertical-align: middle;
+  margin-bottom: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-text-wrapper {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.user-info-header {
+  padding-right: 25px;
+}
+
+.app-button {
+  width: 105px;
+  height: 35px;
+  border: 2px solid greenyellow;
+  background-color: white;
+  justify-content: center;
+}
+
+.courses-wrapper {
+  padding: 25px 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border: 2px solid lightcoral;
 }
 
-.App-link {
-  color: #61dafb;
+.search-wrapper {
+  margin-bottom: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-course {
+  padding: 5px;
+  margin-right: 15px;
+  height: 20px;
+  width: 22%;
+  border-color: cornflowerblue;
+}
+
+.course-card-wrapper {
+  width: 100%;
+  height: 158px;
+  border: 2px solid blueviolet;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 import { mockedAuthorsList } from '../util/consts';
 import formatDuration from '../util/funcs';
 
@@ -10,17 +11,18 @@ export default function CourseCard({
 	creationDate,
 	duration,
 	authors,
+	userCreatedAuthors,
 }) {
 	const [courseAuthorNames, setCourseAuthorNames] = useState('');
 
 	useEffect(() => {
 		setCourseAuthorNames(
-			mockedAuthorsList
+			[...userCreatedAuthors, ...mockedAuthorsList]
 				.filter((author) => authors.includes(author.id))
 				.map((authorObj) => authorObj.name)
 				.join(', ')
 		);
-	}, [authors]);
+	}, [authors, userCreatedAuthors]);
 
 	return (
 		<div id={id} className='course-card-wrapper'>
@@ -45,9 +47,7 @@ export default function CourseCard({
 						<div>{creationDate}</div>
 					</div>
 				</div>
-				<button type='submit' className='app-button'>
-					Show Course
-				</button>
+				<Button text='Show course' />
 			</div>
 		</div>
 	);
@@ -60,4 +60,9 @@ CourseCard.propTypes = {
 	creationDate: PropTypes.string.isRequired,
 	duration: PropTypes.number.isRequired,
 	authors: PropTypes.arrayOf(PropTypes.string).isRequired,
+	userCreatedAuthors: PropTypes.arrayOf(PropTypes.object),
+};
+
+CourseCard.defaultProps = {
+	userCreatedAuthors: [],
 };

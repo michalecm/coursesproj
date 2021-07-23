@@ -1,18 +1,19 @@
 import React from 'react';
+import Button from './Button';
+import Logo from './Logo';
 
 export default function Header() {
 	return (
 		<div className='header'>
-			<div className='logo-wrapper'>
-				<h2>CoursesApp</h2>
-			</div>
+			<Logo />
 			<div className='header-text-wrapper'>
 				<div className='user-info-header'>
 					<p>Mason</p>
 				</div>
-				<button type='submit' className='app-button'>
+				<Button text='Logout' />
+				{/* <button type='submit' className='app-button'>
 					Logout
-				</button>
+				</button> */}
 			</div>
 		</div>
 	);

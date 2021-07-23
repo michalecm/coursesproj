@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 export default function Search(props) {
 	const [searchVal, setSearchVal] = useState('');
@@ -22,9 +23,10 @@ export default function Search(props) {
 				/>
 				<input className='app-button' type='submit' value='Search' />
 			</form>
-			<button type='submit' className='app-button'>
+			<Button text='Add Course' />
+			{/* <button type='submit' className='app-button'>
 				Add Course
-			</button>
+			</button> */}
 		</div>
 	);
 }

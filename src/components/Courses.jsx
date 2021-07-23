@@ -7,6 +7,7 @@ import CreateCourse from './CreateCourse';
 
 export default function Courses() {
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);
+	const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
 	const originalCourses = mockedCoursesList;
 
 	function searchFilter(text) {
@@ -15,6 +16,11 @@ export default function Courses() {
 				(course) => course.title.includes(text) || course.id.includes(text)
 			)
 		);
+	}
+
+	function addCourse(course, userCreatedAuthorsParam) {
+		setUserCreatedAuthors([...userCreatedAuthors, ...userCreatedAuthorsParam]);
+		setCoursesList([course, ...coursesList]);
 	}
 
 	const courses = coursesList.map((course, i) => (
@@ -26,6 +32,7 @@ export default function Courses() {
 			creationDate={course.creationDate}
 			authors={course.authors}
 			duration={course.duration}
+			userCreatedAuthors={userCreatedAuthors}
 		/>
 	));
 
@@ -33,7 +40,7 @@ export default function Courses() {
 		<div className='courses-wrapper'>
 			<Search cb={searchFilter} />
 			<div className='courses-render-wrapper'>{courses}</div>
-			<CreateCourse />
+			<CreateCourse addCourse={addCourse} />
 		</div>
 	);
 }

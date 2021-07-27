@@ -14,7 +14,6 @@ export default function CourseCard({
 	userCreatedAuthors,
 }) {
 	const [courseAuthorNames, setCourseAuthorNames] = useState('');
-
 	useEffect(() => {
 		setCourseAuthorNames(
 			[...userCreatedAuthors, ...mockedAuthorsList]

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import Logo from './Logo';
 
@@ -10,10 +11,10 @@ export default function Header() {
 				<div className='user-info-header'>
 					<p>Mason</p>
 				</div>
-				<Button text='Logout' />
-				{/* <button type='submit' className='app-button'>
-					Logout
-				</button> */}
+				<Link to='/login'>
+					{/* remove user login token */}
+					<Button text='Logout' />
+				</Link>
 			</div>
 		</div>
 	);

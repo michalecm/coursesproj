@@ -142,7 +142,7 @@
 }
 
 .create-course-bottom {
-  margin: 25px 0;
+  margin-top: 25px;
   border: 2px solid #902895;
   padding: 25px;
 }
@@ -230,4 +230,9 @@
   margin-top: 25px;
   vertical-align: middle;
   align-self: center;
+}
+
+.create-course-wrapper {
+  border: 2px solid magenta;
+  padding: 25px;
 }

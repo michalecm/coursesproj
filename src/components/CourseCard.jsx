@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import { mockedAuthorsList } from '../util/consts';
 import formatDuration from '../util/funcs';
@@ -13,15 +14,12 @@ export default function CourseCard({
 	authors,
 	userCreatedAuthors,
 }) {
-	const [courseAuthorNames, setCourseAuthorNames] = useState('');
-	useEffect(() => {
-		setCourseAuthorNames(
-			[...userCreatedAuthors, ...mockedAuthorsList]
-				.filter((author) => authors.includes(author.id))
-				.map((authorObj) => authorObj.name)
-				.join(', ')
-		);
-	}, [authors, userCreatedAuthors]);
+	function getCourseAuthors(customAuthors, providedAuthors) {
+		return [...customAuthors, ...providedAuthors]
+			.filter((author) => authors.includes(author.id))
+			.map((authorObj) => authorObj.name)
+			.join(', ');
+	}
 
 	return (
 		<div id={id} className='course-card-wrapper'>
@@ -35,7 +33,9 @@ export default function CourseCard({
 				<div className='course-metadata'>
 					<div className='subject-left-info-right'>
 						<div className='left-right-header'>Authors:</div>
-						<div className='authors'>{courseAuthorNames}</div>
+						<div className='authors'>
+							{getCourseAuthors(userCreatedAuthors, mockedAuthorsList)}
+						</div>
 					</div>
 					<div className='subject-left-info-right'>
 						<div className='left-right-header'>Duration:</div>
@@ -46,7 +46,22 @@ export default function CourseCard({
 						<div>{creationDate}</div>
 					</div>
 				</div>
-				<Button text='Show course' />
+				<Link
+					to={{
+						pathname: `/courses/${id}`,
+						state: {
+							id,
+							title,
+							description,
+							creationDate,
+							duration,
+							authors,
+							userCreatedAuthors,
+						},
+					}}
+				>
+					<Button text='Show course' />
+				</Link>
 			</div>
 		</div>
 	);

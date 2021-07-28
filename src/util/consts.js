@@ -46,3 +46,5 @@ export const mockedAuthorsList = [
 		name: 'Valentina Larina',
 	},
 ];
+
+export const BACKEND_URL = 'http://localhost:3000/';

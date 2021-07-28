@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default function Search(props) {
@@ -23,10 +24,9 @@ export default function Search(props) {
 				/>
 				<input className='app-button' type='submit' value='Search' />
 			</form>
-			<Button text='Add Course' />
-			{/* <button type='submit' className='app-button'>
-				Add Course
-			</button> */}
+			<Link to='/courses/add'>
+				<Button text='Add Course' />
+			</Link>
 		</div>
 	);
 }

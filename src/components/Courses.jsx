@@ -2,29 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CourseCard from './CourseCard';
 import Search from './Search';
-import { mockedCoursesList } from '../util/consts';
 
-export default function Courses({ passFuncsToApp, funcsFromApp }) {
-	const [coursesList, setCoursesList] = useState(mockedCoursesList);
-	const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
-	const originalCourses = mockedCoursesList;
+export default function Courses({ coursesList, userCreatedAuthors }) {
+	const [searchResults, setSearchResults] = useState(coursesList);
+	const allCourses = coursesList;
 
 	function searchFilter(text) {
-		setCoursesList(
-			originalCourses.filter(
-				(course) => course.title.includes(text) || course.id.includes(text)
-			)
-		);
+		if (!text) {
+			setSearchResults(allCourses);
+		} else {
+			setSearchResults(
+				allCourses.filter(
+					(course) => course.title.includes(text) || course.id.includes(text)
+				)
+			);
+		}
 	}
-
-	function addCourse(course, userCreatedAuthorsParam) {
-		setUserCreatedAuthors([...userCreatedAuthors, ...userCreatedAuthorsParam]);
-		setCoursesList([course, ...coursesList]);
-	}
-
-	passFuncsToApp({ ...funcsFromApp, addCourse });
-
-	const courses = coursesList.map((course, i) => (
+	const courses = searchResults.map((course, i) => (
 		<CourseCard
 			key={course.id}
 			id={course.id}
@@ -41,12 +35,11 @@ export default function Courses({ passFuncsToApp, funcsFromApp }) {
 		<div className='courses-wrapper'>
 			<Search cb={searchFilter} />
 			<div className='courses-render-wrapper'>{courses}</div>
-			{/* <CreateCourse addCourse={addCourse} /> */}
 		</div>
 	);
 }
 
 Courses.propTypes = {
-	passFuncsToApp: PropTypes.func.isRequired,
-	funcsFromApp: PropTypes.arrayOf(PropTypes.func).isRequired,
+	coursesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+	userCreatedAuthors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

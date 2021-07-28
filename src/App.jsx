@@ -1,15 +1,39 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Courses from './components/Courses';
 import Header from './components/Header';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import CreateCourse from './components/CreateCourse';
+import CourseInfo from './components/CourseInfo';
+import { BACKEND_URL } from './util/consts';
 
 function App() {
-	const [functionsGlobalParams, setFunctionsGlobalParams] = useState({});
+	const [coursesList, setCoursesList] = useState([]);
+	const [authorsList, setAuthorsList] = useState([]);
+	const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
+
+	useEffect(() => {
+		if (coursesList.length === 0) {
+			axios
+				.get(BACKEND_URL.concat('courses/all'))
+				.then((data) => data.data.result)
+				.then((res) => setCoursesList(res));
+		}
+	}, [coursesList]);
+
+	useEffect(() => {
+		if (authorsList.length === 0) {
+			axios
+				.get(BACKEND_URL.concat('authors/all'))
+				.then((data) => data.data.result)
+				.then((res) => setAuthorsList(res));
+		}
+	}, [authorsList]);
+
 	const renderMergedProps = (component, ...rest) => {
 		const finalProps = Object.assign({}, ...rest);
 		return React.createElement(component, finalProps);
@@ -36,19 +60,27 @@ function App() {
 						exact
 						path='/courses'
 						component={Courses}
-						passFuncsToApp={setFunctionsGlobalParams}
-						funcsFromApp={functionsGlobalParams}
+						coursesList={coursesList}
+						userCreatedAuthors={userCreatedAuthors}
 					/>
 					<Route path={['/', '/login']} exact component={Login} />
-					<Route path='/courses' exact component={Courses} />
 					<PropsRoute
 						exact
 						path='/courses/add'
 						component={CreateCourse}
-						passFuncsToApp={setFunctionsGlobalParams}
-						funcsFromApp={functionsGlobalParams}
+						coursesList={coursesList}
+						setCoursesList={setCoursesList}
+						userCreatedAuthors={userCreatedAuthors}
+						setUserCreatedAuthors={setUserCreatedAuthors}
+						authorsList={authorsList}
 					/>
 					<Route path='/register' exact component={Registration} />
+					<PropsRoute
+						exact
+						path='/courses/:id'
+						component={CourseInfo}
+						authorsList={authorsList}
+					/>
 				</Switch>
 			</div>
 		</Router>

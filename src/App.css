@@ -86,6 +86,10 @@
 .course-meta-info {
   width: 230px;
 }
+
+.course-meta-info > a > .app-button {
+  margin-top: 12px;
+}
 .course-meta-info,
 .course-metadata {
   display: flex;
@@ -244,6 +248,8 @@
 }
 
 .course-info-wrapper {
+  border: 2px solid teal;
+  padding: 25px;
 }
 .course-info-title {
   width: 100%;

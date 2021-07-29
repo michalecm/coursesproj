@@ -236,3 +236,39 @@
   border: 2px solid magenta;
   padding: 25px;
 }
+
+.course-info-bottom {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.course-info-wrapper {
+}
+.course-info-title {
+  width: 100%;
+  text-align: center;
+}
+.course-info-description {
+  width: 65%;
+}
+.stateItem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 8px;
+}
+.id {
+}
+.stateLabel {
+  font-weight: bold;
+  margin-right: 12px;
+}
+.course-info-author {
+  margin-bottom: 8px;
+}
+.id-authors-divs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

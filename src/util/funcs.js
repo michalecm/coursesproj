@@ -9,6 +9,6 @@ export default function formatDuration(courseTime) {
 
 export function retrieveAuthorNames(ids, authors) {
 	return authors
-		.filter((auth) => authors.contains(ids))
+		.filter((auth) => ids.includes(auth.id))
 		.map((auth) => auth.name);
 }

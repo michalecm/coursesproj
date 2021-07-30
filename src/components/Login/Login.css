@@ -1,0 +1,31 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  vertical-align: middle;
+  margin: auto;
+  width: 35%;
+}
+
+.login-wrapper > p {
+  font-size: 14px;
+  width: 30vh;
+  align-self: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > input {
+  width: 30vh;
+}
+
+.login-form > button {
+  margin-top: 25px;
+  vertical-align: middle;
+  align-self: center;
+}

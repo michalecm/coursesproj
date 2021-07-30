@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import formatDuration, { retrieveAuthorNames } from '../util/funcs';
+import formatDuration, { retrieveAuthorNames } from '../../util/funcs';
+import './CourseInfo.css';
 
 export default function CourseInfo({ authorsList }) {
 	const { state } = useLocation();

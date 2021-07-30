@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import CourseCard from './CourseCard';
-import Search from './Search';
+import CourseCard from '../CourseCard/CourseCard';
+import Search from '../Search/Search';
+import './Courses.css';
 
 export default function Courses({ coursesList, userCreatedAuthors }) {
 	const [searchResults, setSearchResults] = useState(coursesList);

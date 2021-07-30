@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Courses from './components/Courses';
-import Header from './components/Header';
-import Login from './components/Login';
-import Registration from './components/Registration';
-import CreateCourse from './components/CreateCourse';
-import CourseInfo from './components/CourseInfo';
+import Courses from './components/Courses/Courses';
+import Header from './components/Header/Header';
+import Login from './components/Login/Login';
+import Registration from './components/Registration/Registration';
+import CreateCourse from './components/CreateCourse/CreateCourse';
+import CourseInfo from './components/CourseInfo/CourseInfo';
 import { BACKEND_URL } from './util/consts';
 
 function App() {

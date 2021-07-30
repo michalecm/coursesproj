@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Button from './Button';
-import { mockedAuthorsList } from '../util/consts';
-import formatDuration from '../util/funcs';
+import Button from '../Button/Button';
+import { mockedAuthorsList } from '../../util/consts';
+import formatDuration from '../../util/funcs';
+import './CourseCard.css';
 
 export default function CourseCard({
 	id,

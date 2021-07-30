@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import Button from '../Button/Button';
+import './Search.css';
 
 export default function Search(props) {
 	const [searchVal, setSearchVal] = useState('');

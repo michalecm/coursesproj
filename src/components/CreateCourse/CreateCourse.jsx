@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import { mockedAuthorsList } from '../util/consts';
-import Button from './Button';
-import Input from './Input';
+import { mockedAuthorsList } from '../../util/consts';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+import './CreateCourse.css';
 
 export default function CreateCourse({
 	coursesList,

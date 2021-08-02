@@ -8,11 +8,11 @@ import "./Registration.css";
 export default function Registration({ history }) {
   const [registrationState, setRegistrationState] = useState({
     name: "",
-    username: "",
+    email: "",
     password: "",
   });
 
-  function handleUsernameChange(event) {
+  function handleEmailChange(event) {
     setRegistrationState({
       ...registrationState,
       username: event.target.value,
@@ -37,7 +37,7 @@ export default function Registration({ history }) {
       url: BACKEND_URL.concat("register"),
       data: JSON.stringify({
         name: registrationState.name,
-        username: registrationState.username,
+        email: registrationState.email,
         password: registrationState.password,
       }),
       headers: { "Content-Type": "application/json" },
@@ -64,11 +64,11 @@ export default function Registration({ history }) {
           value={registrationState.name}
           onChange={handleNameChange}
         />
-        <p className="text-field-header">Username:</p>
+        <p className="text-field-header">Email:</p>
         <input
           placeholder="Enter username"
-          value={registrationState.username}
-          onChange={handleUsernameChange}
+          value={registrationState.emailame}
+          onChange={handleEmailChange}
         />
         <p className="text-field-header">Password:</p>
         <input

@@ -34,7 +34,7 @@ export default function Registration({ history }) {
     event.preventDefault();
     axios({
       method: "post",
-      url: BACKEND_URL.concat("/register"),
+      url: BACKEND_URL.concat("register"),
       data: {
         name: registrationState.name,
         username: registrationState.username,

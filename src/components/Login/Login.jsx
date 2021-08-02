@@ -8,12 +8,12 @@ import "./Login.css";
 
 export default function Login({ history }) {
   const [loginState, setLoginState] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
   function handleUsernameChange(event) {
-    setLoginState({ ...loginState, username: event.target.value });
+    setLoginState({ ...loginState, email: event.target.value });
   }
 
   function handlePasswordChange(event) {

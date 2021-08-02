@@ -40,7 +40,7 @@ export default function Registration({ history }) {
         username: registrationState.username,
         password: registrationState.password,
       },
-      headers: {},
+      headers: { "Content-Type": "application/json" },
     }).then((res) => {
       // eslint-disable-next-line no-console
       console.log(res.json());

@@ -17,7 +17,7 @@ function App() {
   const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
 
   useEffect(() => {
-    if (localStorage.get("user") === null) {
+    if (localStorage.getItem("user") === null) {
       window.history.pushState({ urlPath: "/login" });
     }
   });

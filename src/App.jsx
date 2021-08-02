@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.log(localStorage.getItem("user"));
-    if (localStorage.getItem("user") === null) {
+    if (localStorage.getItem("user") === undefined) {
       window.history.pushState({ urlPath: "/login" });
     }
   });

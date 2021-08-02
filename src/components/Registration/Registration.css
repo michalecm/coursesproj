@@ -6,7 +6,7 @@
   justify-items: center;
   vertical-align: middle;
   margin: auto;
-  width: 65%;
+  width: 35%;
 }
 
 .registration-wrapper > p {
@@ -21,7 +21,7 @@
 }
 
 .registration > input {
-  width: 30vh;
+  width: 30vw;
 }
 
 .registration-form > button {

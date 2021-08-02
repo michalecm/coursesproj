@@ -1,13 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import "./Header.css";
 
-export default function Header({ history }) {
+export default function Header() {
   function handleLogout() {
     localStorage.removeItem("user");
-    history.push("/login");
+    window.history.pushState({}, "", "/login");
   }
   return (
     <div className="header">
@@ -22,7 +21,3 @@ export default function Header({ history }) {
     </div>
   );
 }
-
-Header.propTypes = {
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-};

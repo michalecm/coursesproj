@@ -35,11 +35,11 @@ export default function Registration({ history }) {
     axios({
       method: "post",
       url: BACKEND_URL.concat("register"),
-      data: {
+      data: JSON.stringify({
         name: registrationState.name,
         username: registrationState.username,
         password: registrationState.password,
-      },
+      }),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {

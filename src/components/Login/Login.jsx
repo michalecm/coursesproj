@@ -33,8 +33,8 @@ export default function Login({ history }) {
     })
       .then((res) => {
         // eslint-disable-next-line no-console
-        console.log(res);
-        localStorage.setItem("user", res.result);
+        console.log(res.data.result);
+        localStorage.setItem("user", res.data.result);
         history.push("/courses");
       })
       .catch((err) => {

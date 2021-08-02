@@ -41,12 +41,14 @@ export default function Registration({ history }) {
         password: registrationState.password,
       },
       headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      // eslint-disable-next-line no-console
-      console.log(res.json());
-      // eslint-disable-next-line no-console
-      console.log("wgtiwgwhgiwhgiuwbh");
-    });
+    })
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res.json());
+        // eslint-disable-next-line no-console
+        console.log("wgtiwgwhgiwhgiuwbh");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

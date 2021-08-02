@@ -52,7 +52,7 @@ export default function Registration({ history }) {
   return (
     <div className="registration-wrapper">
       <h2>Register</h2>
-      <form className="registration-form">
+      <form className="registration-form" onSubmit={processFormSubmit}>
         <p className="text-field-header">Name:</p>
         <input
           placeholder="Enter name"
@@ -72,12 +72,7 @@ export default function Registration({ history }) {
           value={registrationState.password}
           onChange={handlePasswordChange}
         />
-        <Button
-          className="app-button"
-          text="Register"
-          type="submit"
-          onSubmit={processFormSubmit}
-        />
+        <Button className="app-button" text="Register" type="submit" />
       </form>
     </div>
   );

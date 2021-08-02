@@ -22,7 +22,7 @@ function App() {
     if (localStorage.getItem("user") === undefined) {
       window.history.pushState({ urlPath: "/login" });
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (coursesList.length === 0) {

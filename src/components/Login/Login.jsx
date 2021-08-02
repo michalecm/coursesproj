@@ -58,7 +58,7 @@ export default function Login({ history }) {
           value={loginState.password}
           onChange={handlePasswordChange}
         />
-        <Button className="app-button" text="Login" />
+        <Button className="app-button" text="Login" type="submit" />
       </form>
       <p>
         If you do not yet have an account, please register{" "}

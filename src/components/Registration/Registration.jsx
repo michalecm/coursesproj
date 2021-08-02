@@ -15,7 +15,7 @@ export default function Registration({ history }) {
   function handleEmailChange(event) {
     setRegistrationState({
       ...registrationState,
-      username: event.target.value,
+      email: event.target.value,
     });
   }
 
@@ -66,8 +66,8 @@ export default function Registration({ history }) {
         />
         <p className="text-field-header">Email:</p>
         <input
-          placeholder="Enter username"
-          value={registrationState.emailame}
+          placeholder="Enter email"
+          value={registrationState.email}
           onChange={handleEmailChange}
         />
         <p className="text-field-header">Password:</p>

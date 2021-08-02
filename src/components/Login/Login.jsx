@@ -1,45 +1,73 @@
-import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
-import './Login.css';
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import PropTypes from "prop-types";
+import Button from "../Button/Button";
+import { BACKEND_URL } from "../../util/consts";
+import "./Login.css";
 
-export default function Login() {
-	const [loginState, setLoginState] = useState({
-		username: '',
-		password: '',
-	});
+export default function Login({ history }) {
+  const [loginState, setLoginState] = useState({
+    username: "",
+    password: "",
+  });
 
-	function handleUsernameChange(event) {
-		setLoginState({ ...loginState, username: event.target.value });
-	}
+  function handleUsernameChange(event) {
+    setLoginState({ ...loginState, username: event.target.value });
+  }
 
-	function handlePasswordChange(event) {
-		setLoginState({ ...loginState, password: event.target.value });
-	}
+  function handlePasswordChange(event) {
+    setLoginState({ ...loginState, password: event.target.value });
+  }
 
-	return (
-		<div className='login-wrapper'>
-			<h2>Login</h2>
-			<form className='login-form'>
-				<p className='text-field-header'>Username:</p>
-				<input
-					placeholder='Enter username'
-					value={loginState.username}
-					onChange={handleUsernameChange}
-				/>
-				<p className='text-field-header'>Password:</p>
-				<input
-					type='password'
-					placeholder='Enter password'
-					value={loginState.password}
-					onChange={handlePasswordChange}
-				/>
-				<Button className='app-button' text='Login' />
-			</form>
-			<p>
-				If you do not yet have an account, please register{' '}
-				<Link to='/register'>here.</Link>
-			</p>
-		</div>
-	);
+  function processLogin(event) {
+    event.preventDefault();
+    axios({
+      method: "post",
+      url: BACKEND_URL.concat("login"),
+      data: JSON.stringify({
+        email: loginState.email,
+        password: loginState.password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        localStorage.setItem("user", res.result);
+        history.push("/courses");
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+  }
+
+  return (
+    <div className="login-wrapper">
+      <h2>Login</h2>
+      <form className="login-form" onSubmit={processLogin}>
+        <p className="text-field-header">Username:</p>
+        <input
+          placeholder="Enter username"
+          value={loginState.username}
+          onChange={handleUsernameChange}
+        />
+        <p className="text-field-header">Password:</p>
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={loginState.password}
+          onChange={handlePasswordChange}
+        />
+        <Button className="app-button" text="Login" />
+      </form>
+      <p>
+        If you do not yet have an account, please register{" "}
+        <Link to="/register">here.</Link>
+      </p>
+    </div>
+  );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};

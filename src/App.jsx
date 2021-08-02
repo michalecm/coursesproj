@@ -20,7 +20,7 @@ function App() {
     // eslint-disable-next-line no-console
     console.log(localStorage.getItem("user"));
     if (localStorage.getItem("user") === undefined) {
-      window.history.pushState({ urlPath: "/login" });
+      window.history.pushState({}, "", BACKEND_URL.concat("login"));
     }
   }, []);
 

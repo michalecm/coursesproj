@@ -48,7 +48,10 @@ export default function Registration({ history }) {
         // eslint-disable-next-line no-console
         console.log("wgtiwgwhgiwhgiuwbh");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
   }
 
   return (

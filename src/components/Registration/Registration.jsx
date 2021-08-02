@@ -43,7 +43,7 @@ export default function Registration({ history }) {
       headers: {},
     }).then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res);
+      console.log(res.json());
     });
   }
 

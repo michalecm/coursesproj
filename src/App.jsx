@@ -17,6 +17,8 @@ function App() {
   const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(localStorage.getItem("user"));
     if (localStorage.getItem("user") === null) {
       window.history.pushState({ urlPath: "/login" });
     }

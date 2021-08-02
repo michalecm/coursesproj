@@ -44,9 +44,8 @@ export default function Registration({ history }) {
     })
       .then((res) => {
         // eslint-disable-next-line no-console
-        console.log(res.json());
-        // eslint-disable-next-line no-console
-        console.log("wgtiwgwhgiwhgiuwbh");
+        console.log(res);
+        history.push("/login");
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

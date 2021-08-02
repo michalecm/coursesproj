@@ -6,7 +6,7 @@ import "./Header.css";
 export default function Header() {
   function handleLogout() {
     localStorage.removeItem("user");
-    window.history.replace("/login");
+    window.location.replace("/login");
   }
   return (
     <div className="header">

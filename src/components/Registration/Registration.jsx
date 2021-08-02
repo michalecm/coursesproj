@@ -40,7 +40,7 @@ export default function Registration({ history }) {
         username: registrationState.username,
         password: registrationState.password,
       },
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {},
     }).then((res) => {
       // eslint-disable-next-line no-console
       console.log(res);

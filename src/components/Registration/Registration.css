@@ -11,7 +11,7 @@
 
 .registration-wrapper > p {
   font-size: 14px;
-  width: 30vh;
+  width: 30vw;
   align-self: center;
 }
 
@@ -20,8 +20,8 @@
   flex-direction: column;
 }
 
-.registration > input {
-  width: 30vw;
+.registration-form > input {
+  width: 22vw;
 }
 
 .registration-form > button {

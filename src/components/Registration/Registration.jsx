@@ -1,9 +1,11 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { BACKEND_URL } from "../../util/consts";
 import Button from "../Button/Button";
 import "./Registration.css";
 
-export default function Login() {
+export default function Registration({ history }) {
   const [registrationState, setRegistrationState] = useState({
     name: "",
     username: "",
@@ -26,6 +28,20 @@ export default function Login() {
 
   function handleNameChange(event) {
     setRegistrationState({ ...registrationState, name: event.target.value });
+  }
+
+  function processFormSubmit(event) {
+    event.preventDefault();
+    axios({
+      method: "post",
+      url: BACKEND_URL.concat("/register"),
+      data: {
+        name: registrationState.name,
+        username: registrationState.username,
+        password: registrationState.password,
+      },
+      headers: { "Content-Type": "multipart/form-data" },
+    });
   }
 
   return (
@@ -51,8 +67,17 @@ export default function Login() {
           value={registrationState.password}
           onChange={handlePasswordChange}
         />
-        <Button className="app-button" text="Register" type="submit" />
+        <Button
+          className="app-button"
+          text="Register"
+          type="submit"
+          onSubmit={processFormSubmit}
+        />
       </form>
     </div>
   );
 }
+
+Registration.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};

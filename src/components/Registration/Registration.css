@@ -1,0 +1,31 @@
+.registration-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  vertical-align: middle;
+  margin: auto;
+  width: 35%;
+}
+
+.registration-wrapper > p {
+  font-size: 14px;
+  width: 30vh;
+  align-self: center;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration > input {
+  width: 30vh;
+}
+
+.registration-form > button {
+  margin-top: 25px;
+  vertical-align: middle;
+  align-self: center;
+}

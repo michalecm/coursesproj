@@ -41,7 +41,7 @@ export default function Registration({ history }) {
         password: registrationState.password,
       },
       headers: { "Content-Type": "multipart/form-data" },
-    });
+    }).then((res) => console.log(res));
   }
 
   return (

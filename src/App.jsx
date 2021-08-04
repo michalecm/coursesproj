@@ -17,7 +17,6 @@ import { addAuthor } from "./store/authors/actionCreators";
 function App() {
   const dispatch = useDispatch();
   const appstate = useSelector((state) => state);
-  const servicer = new APIService();
 
   // update this to have an Auth context?
   useEffect(() => {
@@ -30,19 +29,19 @@ function App() {
 
   useEffect(() => {
     if (appstate.coursesReducer.courses.length < 1) {
-      servicer
-        .Get(ENDPOINTS.GET_ALL_COURSES)
-        .then((courses) => dispatch(addCourse(courses)));
+      APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) =>
+        dispatch(addCourse(courses))
+      );
     }
-  }, [dispatch, servicer, appstate.coursesReducer.courses.length]);
+  }, [dispatch, appstate.coursesReducer.courses.length]);
 
   useEffect(() => {
     if (appstate.authorsReducer.authors.length < 1) {
-      servicer
-        .Get(ENDPOINTS.GET_ALL_AUTHORS)
-        .then((authors) => dispatch(addAuthor(authors)));
+      APIService.Get(ENDPOINTS.GET_ALL_AUTHORS).then((authors) =>
+        dispatch(addAuthor(authors))
+      );
     }
-  }, [dispatch, servicer, appstate.authorsReducer.authors.length]);
+  }, [dispatch, appstate.authorsReducer.authors.length]);
 
   const renderMergedProps = (component, ...rest) => {
     const finalProps = Object.assign({}, ...rest);

@@ -28,6 +28,14 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    // eslint-disable-next-line no-console
+    console.log(store);
+    // eslint-disable-next-line no-console
+    console.log(store.authors);
+    // eslint-disable-next-line no-console
+    console.log(typeof store.authors);
     if (store.coursesReducer.courses.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) =>
         dispatch(addCourse(courses))

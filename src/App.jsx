@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import Courses from "./components/Courses/Courses";
@@ -13,10 +13,10 @@ import { ENDPOINTS } from "./util/consts";
 import APIService from "./util/APIService";
 import { addCourse } from "./store/courses/actionCreators";
 import { addAuthor } from "./store/authors/actionCreators";
-import store from "./store";
 
 function App() {
   const dispatch = useDispatch();
+  const appstate = useSelector((state) => state);
 
   // update this to have an Auth context?
   useEffect(() => {
@@ -28,28 +28,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    // eslint-disable-next-line no-console
-    console.log(store);
-    // eslint-disable-next-line no-console
-    console.log(store.authors);
-    // eslint-disable-next-line no-console
-    console.log(typeof store.authors);
-    if (store.coursesReducer.courses.length < 1) {
+    if (appstate.coursesReducer.courses.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) =>
         dispatch(addCourse(courses))
       );
     }
-  }, [dispatch]);
+  }, [dispatch, appstate.coursesReducer.courses.length]);
 
   useEffect(() => {
-    if (store.authorsReducer.authors.length < 1) {
+    if (appstate.authorsReducer.authors.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_AUTHORS).then((authors) =>
         dispatch(addAuthor(authors))
       );
     }
-  }, [dispatch]);
+  }, [dispatch, appstate.authorsReducer.authors.length]);
 
   const renderMergedProps = (component, ...rest) => {
     const finalProps = Object.assign({}, ...rest);

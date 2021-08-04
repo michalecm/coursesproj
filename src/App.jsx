@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (store.courses.length < 1) {
+    if (store.coursesReducer.courses.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) =>
         dispatch(addCourse(courses))
       );
@@ -36,7 +36,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (store.authors.length < 1) {
+    if (store.authorsReducer.authors.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_AUTHORS).then((authors) =>
         dispatch(addAuthor(authors))
       );

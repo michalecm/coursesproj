@@ -8,7 +8,7 @@ const userInitialState = {
 	// After success login - value from API /login response. See Swagger.
 };
 
-const userReducer = (state = userInitialState, action) => {
+const usersReducer = (state = userInitialState, action) => {
 	if (action === undefined) {
 		return state;
 	}
@@ -34,4 +34,4 @@ const userReducer = (state = userInitialState, action) => {
 	}
 };
 
-export default userReducer;
+export default usersReducer;

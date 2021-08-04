@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACKEND_URL, ENDPOINTS } from "./consts";
+import { BACKEND_URL } from "./consts";
 
 export default class APIService {
   constructor() {

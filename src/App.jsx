@@ -1,21 +1,24 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Courses from './components/Courses/Courses';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import CourseInfo from './components/CourseInfo/CourseInfo';
-import { BACKEND_URL } from './util/consts';
+import { ENDPOINTS } from './util/consts';
+import APIService from './util/APIService';
+import { addCourse } from './store/courses/actionCreators';
+import { addAuthor } from './store/authors/actionCreators';
+import store from './store';
 
 function App() {
-	const [coursesList, setCoursesList] = useState([]);
-	const [authorsList, setAuthorsList] = useState([]);
-	const [userCreatedAuthors, setUserCreatedAuthors] = useState([]);
+	const dispatch = useDispatch();
 
+	// update this to have an Auth context?
 	useEffect(() => {
 		// eslint-disable-next-line no-console
 		console.log(localStorage.getItem('user'));
@@ -25,22 +28,20 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (coursesList.length === 0) {
-			axios
-				.get(BACKEND_URL.concat('courses/all'))
-				.then((data) => data.data.result)
-				.then((res) => setCoursesList(res));
+		if (store.coursesReducer.courses.length < 1) {
+			APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) =>
+				dispatch(addCourse(courses))
+			);
 		}
-	}, [coursesList]);
+	}, [dispatch]);
 
 	useEffect(() => {
-		if (authorsList.length === 0) {
-			axios
-				.get(BACKEND_URL.concat('authors/all'))
-				.then((data) => data.data.result)
-				.then((res) => setAuthorsList(res));
+		if (store.authorsReducer.authors.length < 1) {
+			APIService.Get(ENDPOINTS.GET_ALL_AUTHORS).then((authors) =>
+				dispatch(addAuthor(authors))
+			);
 		}
-	}, [authorsList]);
+	}, [dispatch]);
 
 	const renderMergedProps = (component, ...rest) => {
 		const finalProps = Object.assign({}, ...rest);
@@ -64,31 +65,11 @@ function App() {
 			<div className='App'>
 				<Header />
 				<Switch>
-					<PropsRoute
-						exact
-						path='/courses'
-						component={Courses}
-						coursesList={coursesList}
-						userCreatedAuthors={userCreatedAuthors}
-					/>
+					<PropsRoute exact path='/courses' component={Courses} />
 					<Route path={['/', '/login']} exact component={Login} />
-					<PropsRoute
-						exact
-						path='/courses/add'
-						component={CreateCourse}
-						coursesList={coursesList}
-						setCoursesList={setCoursesList}
-						userCreatedAuthors={userCreatedAuthors}
-						setUserCreatedAuthors={setUserCreatedAuthors}
-						authorsList={authorsList}
-					/>
+					<PropsRoute exact path='/courses/add' component={CreateCourse} />
 					<Route path='/register' exact component={Registration} />
-					<PropsRoute
-						exact
-						path='/courses/:id'
-						component={CourseInfo}
-						authorsList={authorsList}
-					/>
+					<PropsRoute exact path='/courses/:id' component={CourseInfo} />
 				</Switch>
 			</div>
 		</Router>

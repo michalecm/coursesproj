@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useSelector } from 'react';
 import CourseCard from '../CourseCard/CourseCard';
 import Search from '../Search/Search';
 import './Courses.css';
 
-export default function Courses({ coursesList, userCreatedAuthors }) {
-	const [searchResults, setSearchResults] = useState(coursesList);
-	const allCourses = coursesList;
+export default function Courses() {
+	const allCourses = useSelector((state) => state.coursesReducer.courses);
+	const [searchResults, setSearchResults] = useState(allCourses);
 
 	function searchFilter(text) {
 		if (!text) {
@@ -28,7 +27,6 @@ export default function Courses({ coursesList, userCreatedAuthors }) {
 			creationDate={course.creationDate}
 			authors={course.authors}
 			duration={course.duration}
-			userCreatedAuthors={userCreatedAuthors}
 		/>
 	));
 
@@ -39,8 +37,3 @@ export default function Courses({ coursesList, userCreatedAuthors }) {
 		</div>
 	);
 }
-
-Courses.propTypes = {
-	coursesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-	userCreatedAuthors: PropTypes.arrayOf(PropTypes.object).isRequired,
-};

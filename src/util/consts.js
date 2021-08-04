@@ -47,4 +47,25 @@ export const mockedAuthorsList = [
 	},
 ];
 
-export const BACKEND_URL = 'http://localhost:3000/';
+export const BACKEND_URL = 'http://localhost:3000';
+
+export const ENDPOINTS = {
+	POST_LOGIN: '/login',
+	POST_REGISTER: '/register',
+	DELETE_LOGOUT: '/logout',
+	CONTROLLER_COURSES: '/courses',
+	GET_ALL_COURSES: '/courses/all',
+	GET_FILTERED_COURSES: '/courses/filter',
+	POST_ADD_COURSE: '/courses/add',
+	GET_COURSE_BY_ID: '/courses',
+	PUT_COURSE_BY_ID: '/courses',
+	DELETE_COURSE_BY_ID: '/courses',
+	CONTROLLER_AUTHORS: '/authors',
+	GET_ALL_AUTHORS: '/authors/all',
+	POST_ADD_AUTHOR: '/authors/add',
+	GET_AUTHOR_BY_ID: '/authors',
+	PUT_AUTHOR_BY_ID: '/authors',
+	DELETE_AUTHOR_BY_ID: '/authors',
+	CONTROLLER_USERS: '/users',
+	GET_CURRENT_USER: '/users/me',
+};

@@ -34,7 +34,7 @@ function App() {
         .Get(ENDPOINTS.GET_ALL_COURSES)
         .then((courses) => dispatch(addCourse(courses)));
     }
-  }, [dispatch, appstate.coursesReducer.courses.length]);
+  }, [dispatch, servicer, appstate.coursesReducer.courses.length]);
 
   useEffect(() => {
     if (appstate.authorsReducer.authors.length < 1) {
@@ -42,7 +42,7 @@ function App() {
         .Get(ENDPOINTS.GET_ALL_AUTHORS)
         .then((authors) => dispatch(addAuthor(authors)));
     }
-  }, [dispatch, appstate.authorsReducer.authors.length]);
+  }, [dispatch, servicer, appstate.authorsReducer.authors.length]);
 
   const renderMergedProps = (component, ...rest) => {
     const finalProps = Object.assign({}, ...rest);

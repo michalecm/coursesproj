@@ -15,7 +15,7 @@ const authorsReducer = (state = authorsInitialState, action) => {
   switch (type) {
     case ADD_AUTHOR:
       return {
-        authors: [...state.authors, payload],
+        authors: [...state.authors, ...payload],
       };
     case DELETE_AUTHOR:
       return {

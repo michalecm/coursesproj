@@ -7,7 +7,7 @@ export default class APIService {
     this.data = {};
   }
 
-  static Get(endpoint, queries = {}) {
+  Get(endpoint, queries = {}) {
     if (
       !(
         queries &&

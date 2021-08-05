@@ -8,6 +8,9 @@ export default function Courses() {
   const allCourses = useSelector((state) => state.coursesReducer.courses);
   const [searchResults, setSearchResults] = useState(allCourses);
 
+  // eslint-disable-next-line no-console
+  console.log(allCourses);
+
   function searchFilter(text) {
     if (!text) {
       setSearchResults(allCourses);
@@ -19,6 +22,10 @@ export default function Courses() {
       );
     }
   }
+  // eslint-disable-next-line no-console
+  console.log(allCourses);
+  // eslint-disable-next-line no-console
+  console.log(typeof allCourses);
   // eslint-disable-next-line no-debugger
   debugger;
   const courses = searchResults.map((course, i) => (

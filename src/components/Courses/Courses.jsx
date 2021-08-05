@@ -28,20 +28,20 @@ export default function Courses() {
   console.log(typeof allCourses);
   // eslint-disable-next-line no-debugger
   debugger;
-  const courses = searchResults.map(
-    (course, i) =>
-      Boolean(allCourses.length) && (
-        <CourseCard
-          key={course.id}
-          id={course.id}
-          title={course.title}
-          description={course.description}
-          creationDate={course.creationDate}
-          authors={course.authors}
-          duration={course.duration}
-        />
-      )
-  );
+  const courses =
+    allCourses.length > 0
+      ? searchResults.map((course, i) => (
+          <CourseCard
+            key={course.id}
+            id={course.id}
+            title={course.title}
+            description={course.description}
+            creationDate={course.creationDate}
+            authors={course.authors}
+            duration={course.duration}
+          />
+        ))
+      : [];
 
   return (
     <div className="courses-wrapper">

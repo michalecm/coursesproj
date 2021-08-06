@@ -20,8 +20,8 @@ function App() {
 
   // update this to have an Auth context?
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(localStorage.getItem("user"));
+    // // eslint-disable-next-line no-console
+    // console.log(localStorage.getItem('user'));
     if (localStorage.getItem("user") === undefined) {
       window.location.replace("/login");
     }
@@ -30,6 +30,8 @@ function App() {
   useEffect(() => {
     if (appstate.coursesReducer.courses.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
         // eslint-disable-next-line no-console
         console.dir(courses);
         // eslint-disable-next-line no-console

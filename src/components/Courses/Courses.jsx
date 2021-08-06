@@ -7,11 +7,11 @@ import "./Courses.css";
 export default function Courses() {
   const allCourses = useSelector((state) => state.coursesReducer);
   const allAuthors = useSelector((state) => state.authorsReducer);
-  const [searchResults, setSearchResults] = useState(...allCourses.courses);
+  const [searchResults, setSearchResults] = useState(allCourses.courses);
 
   function searchFilter(text) {
     if (!text) {
-      setSearchResults(...allCourses.courses);
+      setSearchResults(allCourses.courses);
     } else {
       setSearchResults(
         allCourses.courses.filter(

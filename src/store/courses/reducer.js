@@ -3,7 +3,7 @@ import { ADD_COURSE, DELETE_COURSE, UPDATE_COURSE } from "./actionTypes";
 const coursesInitialState = {
   courses: [], /// default value - empty array. After success getting courses from API - array of courses.
   // See Swagger `/courses/all`
-  isLoading: !coursesInitialState.courses.length > 0,
+  isLoading: true,
 };
 
 const coursesReducer = (state = coursesInitialState, action) => {
@@ -17,6 +17,7 @@ const coursesReducer = (state = coursesInitialState, action) => {
     case ADD_COURSE:
       return {
         courses: [...state.courses, ...payload],
+        isLoading: false,
       };
     case DELETE_COURSE:
       return {

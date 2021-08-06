@@ -1,30 +1,31 @@
-import { ADD_AUTHOR, DELETE_AUTHOR } from './actionTypes';
+import { ADD_AUTHOR, DELETE_AUTHOR } from "./actionTypes";
 
 const authorsInitialState = {
-	authors: [], /// default value - empty array. After success getting courses from API - array of courses.
-	// See Swagger `/courses/all`.
-	isLoading: true,
+  authors: [], /// default value - empty array. After success getting courses from API - array of courses.
+  // See Swagger `/courses/all`.
+  isLoading: true,
 };
 
 const authorsReducer = (state = authorsInitialState, action) => {
-	if (action === undefined) {
-		return state;
-	}
+  if (action === undefined) {
+    return state;
+  }
 
-	const { type, payload } = action;
+  const { type, payload } = action;
 
-	switch (type) {
-		case ADD_AUTHOR:
-			return {
-				authors: [...state.authors, ...payload],
-			};
-		case DELETE_AUTHOR:
-			return {
-				courses: [...state.authors].filter((author) => author.id !== payload),
-			};
-		default:
-			return state;
-	}
+  switch (type) {
+    case ADD_AUTHOR:
+      return {
+        authors: [...state.authors, ...payload],
+        isLoading: false,
+      };
+    case DELETE_AUTHOR:
+      return {
+        courses: [...state.authors].filter((author) => author.id !== payload),
+      };
+    default:
+      return state;
+  }
 };
 
 export default authorsReducer;

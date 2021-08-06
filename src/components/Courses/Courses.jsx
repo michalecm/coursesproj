@@ -26,20 +26,24 @@ export default function Courses() {
   debugger;
   const courses =
     !allCourses.isLoading && !allAuthors.isLoading
-      ? searchResults.map((course, i) => (
-          <CourseCard
-            key={course.id}
-            id={course.id}
-            title={course.title}
-            description={course.description}
-            creationDate={course.creationDate}
-            authors={course.authors}
-            duration={course.duration}
-          />
-        ))
+      ? searchResults.map((course, i) => {
+          // eslint-disable-next-line no-debugger
+          debugger;
+          return (
+            <CourseCard
+              key={course.id}
+              id={course.id}
+              title={course.title}
+              description={course.description}
+              creationDate={course.creationDate}
+              authors={course.authors}
+              duration={course.duration}
+            />
+          );
+        })
       : [];
 
-  return !allCourses.isLoading ? (
+  return !allCourses.isLoading && !allAuthors.isLoading ? (
     <div className="courses-wrapper">
       <Search cb={searchFilter} />
       <div className="courses-render-wrapper">{courses}</div>

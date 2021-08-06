@@ -39,7 +39,7 @@ export default function Courses() {
         ))
       : [];
 
-  return !(allCourses.isLoading && allAuthors.isLoading) ? (
+  return !allCourses.isLoading ? (
     <div className="courses-wrapper">
       <Search cb={searchFilter} />
       <div className="courses-render-wrapper">{courses}</div>

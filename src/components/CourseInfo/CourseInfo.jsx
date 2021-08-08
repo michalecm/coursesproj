@@ -5,14 +5,12 @@ import formatDuration, { retrieveAuthorNames } from "../../util/funcs";
 import "./CourseInfo.css";
 
 export default function CourseInfo() {
-  const { stateFromLocation } = useLocation();
+  const location = useLocation();
+  const { myData } = location.state;
   const authorsList = useSelector((state) => state.authorsReducer);
   const coursesList = useSelector((state) => state.coursesReducer);
 
-  const authorsDivs = retrieveAuthorNames(
-    stateFromLocation.authors,
-    authorsList.authors
-  )
+  const authorsDivs = retrieveAuthorNames(myData.authors, authorsList.authors)
     .sort()
     .map((author) => (
       <div key={`${author}key`} className="course-info-author">
@@ -26,26 +24,24 @@ export default function CourseInfo() {
         <Link to="/courses"> &#60; Back to courses </Link>
       </div>
       <div className="course-info-title">
-        <h2>{stateFromLocation.title}</h2>
+        <h2>{myData.title}</h2>
       </div>
       <div className="course-info-bottom">
         <div className="course-info-description">
-          <p>{stateFromLocation.description}</p>
+          <p>{myData.description}</p>
         </div>
         <div>
           <div className="stateItem">
             <div className="stateLabel">ID: </div>
-            <div className="id">{stateFromLocation.id}</div>
+            <div className="id">{myData.id}</div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Duration: </div>
-            <div className="id">
-              {formatDuration(stateFromLocation.duration)}
-            </div>
+            <div className="id">{formatDuration(myData.duration)}</div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Created: </div>
-            <div className="id">{stateFromLocation.creationDate}</div>
+            <div className="id">{myData.creationDate}</div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Authors: </div>
@@ -55,6 +51,6 @@ export default function CourseInfo() {
       </div>
     </div>
   ) : (
-    <div></div>
+    <div />
   );
 }

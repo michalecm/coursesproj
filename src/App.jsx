@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (appstate.coursesReducer.courses.length < 2) {
+    if (appstate.coursesReducer.courses.length < 1) {
       APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) => {
         dispatch(addCourse(courses));
       });

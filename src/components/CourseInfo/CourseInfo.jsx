@@ -6,10 +6,12 @@ import "./CourseInfo.css";
 
 export default function CourseInfo() {
   const { stateFromLocation } = useLocation();
-  const authorsList = useSelector((state) => state.authorsReducer.authors);
+  const authorsList = useSelector((state) => state.authorsReducer);
+  const coursesList = useSelector((state) => state.coursesReducer);
+
   const authorsDivs = retrieveAuthorNames(
     stateFromLocation.authors,
-    authorsList
+    authorsList.authors
   )
     .sort()
     .map((author) => (
@@ -17,7 +19,8 @@ export default function CourseInfo() {
         <div className="author-space">{author}</div>
       </div>
     ));
-  return (
+
+  return !authorsList.isLoading && !coursesList.isLoading ? (
     <div className="course-info-wrapper">
       <div className="backlink">
         <Link to="/courses"> &#60; Back to courses </Link>
@@ -51,5 +54,7 @@ export default function CourseInfo() {
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 }

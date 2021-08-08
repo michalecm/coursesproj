@@ -5,9 +5,12 @@ import formatDuration, { retrieveAuthorNames } from "../../util/funcs";
 import "./CourseInfo.css";
 
 export default function CourseInfo() {
-  const { propData } = useLocation();
+  const { stateFromLocation } = useLocation();
   const authorsList = useSelector((state) => state.authorsReducer.authors);
-  const authorsDivs = retrieveAuthorNames(propData.authors, authorsList)
+  const authorsDivs = retrieveAuthorNames(
+    stateFromLocation.authors,
+    authorsList
+  )
     .sort()
     .map((author) => (
       <div key={`${author}key`} className="course-info-author">
@@ -20,24 +23,26 @@ export default function CourseInfo() {
         <Link to="/courses"> &#60; Back to courses </Link>
       </div>
       <div className="course-info-title">
-        <h2>{propData.title}</h2>
+        <h2>{stateFromLocation.title}</h2>
       </div>
       <div className="course-info-bottom">
         <div className="course-info-description">
-          <p>{propData.description}</p>
+          <p>{stateFromLocation.description}</p>
         </div>
         <div>
           <div className="stateItem">
             <div className="stateLabel">ID: </div>
-            <div className="id">{propData.id}</div>
+            <div className="id">{stateFromLocation.id}</div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Duration: </div>
-            <div className="id">{formatDuration(propData.duration)}</div>
+            <div className="id">
+              {formatDuration(stateFromLocation.duration)}
+            </div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Created: </div>
-            <div className="id">{propData.creationDate}</div>
+            <div className="id">{stateFromLocation.creationDate}</div>
           </div>
           <div className="stateItem">
             <div className="stateLabel">Authors: </div>

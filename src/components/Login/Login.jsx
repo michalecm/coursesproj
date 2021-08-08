@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import PropTypes from "prop-types";
 import Button from "../Button/Button";
-import { BACKEND_URL } from "../../util/consts";
+import { BACKEND_URL, ENDPOINTS } from "../../util/consts";
 import { logIn } from "../../store/users/actionCreators";
 import "./Login.css";
+import APIService from "../../util/APIService";
 
 export default function Login({ history }) {
   const [loginState, setLoginState] = useState({
@@ -26,14 +27,9 @@ export default function Login({ history }) {
 
   function processLogin(event) {
     event.preventDefault();
-    axios({
-      method: "post",
-      url: BACKEND_URL.concat("/login"),
-      data: JSON.stringify({
-        email: loginState.email,
-        password: loginState.password,
-      }),
-      headers: { "Content-Type": "application/json" },
+    APIService.Post(ENDPOINTS.POST_LOGIN, {
+      email: loginState.email,
+      password: loginState.password,
     })
       .then((res) => {
         // eslint-disable-next-line no-console

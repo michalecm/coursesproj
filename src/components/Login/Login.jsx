@@ -32,14 +32,14 @@ export default function Login({ history }) {
     })
       .then((res) => {
         // eslint-disable-next-line no-console
-        console.log(res.data.result);
-        localStorage.setItem("user", res.data.result);
+        console.log(res.result);
+        localStorage.setItem("user", res.result);
         dispatch(
           logIn({
             email: loginState.email,
-            name: res.data.user.name,
-            isAuth: res.data.successful,
-            token: res.data.result,
+            name: res.user.name,
+            isAuth: res.successful,
+            token: res.result,
           })
         );
         history.push("/courses");

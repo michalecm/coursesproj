@@ -7,6 +7,12 @@ import "./CourseInfo.css";
 export default function CourseInfo() {
   const location = useLocation();
   const { myData } = location.state;
+  // eslint-disable-next-line no-console
+  console.dir(location.state);
+  // eslint-disable-next-line no-console
+  console.log(myData);
+  // eslint-disable-next-line no-console
+  console.dir(...location.state);
   const authorsList = useSelector((state) => state.authorsReducer);
   const coursesList = useSelector((state) => state.coursesReducer);
 

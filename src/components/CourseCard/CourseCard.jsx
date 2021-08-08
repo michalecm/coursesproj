@@ -27,7 +27,7 @@ export default function CourseCard({
     <div id={id} className="course-card-wrapper">
       <div className="course-info">
         <div className="course-header">
-          <h2>{title}</h2>
+          <h2>{title}</h2> <p>X</p>
         </div>
         <div className="course-about">{description}</div>
       </div>

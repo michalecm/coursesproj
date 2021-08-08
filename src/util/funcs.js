@@ -12,3 +12,10 @@ export function retrieveAuthorNames(ids, authors) {
 		.filter((auth) => ids.includes(auth.id))
 		.map((auth) => auth.name);
 }
+
+export function getCourseAuthors(allAuthors, courseAuthors) {
+	return allAuthors
+		.filter((author) => courseAuthors.includes(author.id))
+		.map((authorObj) => authorObj.name)
+		.join(', ');
+}

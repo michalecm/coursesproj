@@ -14,7 +14,6 @@ export default function Login({ history }) {
     password: "",
   });
 
-  const loginStateRedux = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   function handleUsernameChange(event) {
@@ -29,7 +28,7 @@ export default function Login({ history }) {
     event.preventDefault();
     axios({
       method: "post",
-      url: BACKEND_URL.concat("login"),
+      url: BACKEND_URL.concat("/login"),
       data: JSON.stringify({
         email: loginState.email,
         password: loginState.password,

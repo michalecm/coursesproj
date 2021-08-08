@@ -10,14 +10,6 @@ export default function CourseInfo() {
   const authorsList = useSelector((state) => state.authorsReducer);
   const coursesList = useSelector((state) => state.coursesReducer);
 
-  const authorsDivs = retrieveAuthorNames(myData.authors, authorsList.authors)
-    .sort()
-    .map((author) => (
-      <div key={`${author}key`} className="course-info-author">
-        <div className="author-space">{author}</div>
-      </div>
-    ));
-
   return !authorsList.isLoading && !coursesList.isLoading ? (
     <div className="course-info-wrapper">
       <div className="backlink">
@@ -45,7 +37,15 @@ export default function CourseInfo() {
           </div>
           <div className="stateItem">
             <div className="stateLabel">Authors: </div>
-            <div className="id-authors-divs">{authorsDivs}</div>
+            <div className="id-authors-divs">
+              {retrieveAuthorNames(myData.authors, authorsList.authors)
+                .sort()
+                .map((author) => (
+                  <div key={`${author}key`} className="course-info-author">
+                    <div className="author-space">{author}</div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>

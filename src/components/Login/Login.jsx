@@ -1,10 +1,9 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../Button/Button";
-import { BACKEND_URL, ENDPOINTS } from "../../util/consts";
+import { ENDPOINTS } from "../../util/consts";
 import { logIn } from "../../store/users/actionCreators";
 import "./Login.css";
 import APIService from "../../util/APIService";

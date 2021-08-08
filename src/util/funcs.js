@@ -7,7 +7,7 @@ export default function formatDuration(courseTime) {
   return `${hrs}:${mins} hours`;
 }
 
-export function retrieveAuthorNames(ids = {}, authors) {
+export function retrieveAuthorNames(ids = [], authors) {
   return authors
     .filter((auth) => ids.includes(auth.id))
     .map((auth) => auth.name);

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { MdDelete } from "react-icons/md";
 import Button from "../Button/Button";
 import formatDuration, { getCourseAuthors } from "../../util/funcs";
 import { deleteCourse } from "../../store/courses/actionCreators";
@@ -27,7 +28,7 @@ export default function CourseCard({
     <div id={id} className="course-card-wrapper">
       <div className="course-info">
         <div className="course-header">
-          <h2>{title}</h2> <p>X</p>
+          <h2>{title}</h2> <MdDelete onClick={handleDeleteCourse}>X</MdDelete>
         </div>
         <div className="course-about">{description}</div>
       </div>

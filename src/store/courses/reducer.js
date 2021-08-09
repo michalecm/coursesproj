@@ -16,7 +16,7 @@ const coursesReducer = (state = coursesInitialState, action) => {
   switch (type) {
     case ADD_COURSE:
       return {
-        courses: [...state.courses, payload],
+        courses: [...state.courses, ...payload],
         isLoading: false,
       };
     case DELETE_COURSE:

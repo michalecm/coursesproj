@@ -73,7 +73,7 @@ export default function CreateCourse({ history }) {
         console.log(res);
         setTimeout(() => {
           dispatch(addAuthor(newCourseData.authorField));
-        }, 5000);
+        }, 10000);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

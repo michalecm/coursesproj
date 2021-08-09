@@ -6,7 +6,7 @@ export const addAuthor = (author) => ({
 });
 
 export const addAuthors = (authors) => ({
-  type: ADD_AUTHOR,
+  type: ADD_AUTHORS,
   payload: authors,
 });
 

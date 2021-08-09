@@ -29,9 +29,11 @@ export default function CourseCard({
       appstate.userReducer.token
     )
       .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res);
-        dispatch(deleteCourse(id));
+        if (res.successful) dispatch(deleteCourse(id));
+        else {
+          // eslint-disable-next-line no-console
+          console.log(res);
+        }
       })
       .catch((err) => {
         // eslint-disable-next-line no-alert

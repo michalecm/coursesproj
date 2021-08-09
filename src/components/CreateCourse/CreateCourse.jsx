@@ -62,8 +62,7 @@ export default function CreateCourse({ history }) {
     setNewCourseData({ ...newCourseData, duration: event.target.value });
   }
 
-  function handleCreateAuthor(event) {
-    event.preventDefault();
+  function handleCreateAuthor() {
     setNewCourseData({
       ...newCourseData,
       authorField: { ...newCourseData.authorField, id: uuidv4() },

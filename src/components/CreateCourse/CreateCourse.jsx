@@ -85,10 +85,10 @@ export default function CreateCourse({ history }) {
       });
   }
 
-  function handleDeleteAuthor(id) {
+  function handleDeleteAuthor(author) {
     // eslint-disable-next-line no-console
-    console.log(id);
-    APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
+    console.log(author);
+    APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, author.id, auth.token)
       .then((res) => {
         // eslint-disable-next-line no-console
         console.log("test 2");
@@ -101,7 +101,7 @@ export default function CreateCourse({ history }) {
           console.log(res);
           // eslint-disable-next-line no-console
           console.log("dispatching delete author");
-          dispatch(deleteAuthor(id));
+          dispatch(deleteAuthor(author.id));
         }
       })
       .catch((err) => {
@@ -146,7 +146,7 @@ export default function CreateCourse({ history }) {
     <div key={`${author.id}key`} className="author-w-button">
       <div className="author-space">
         {author.name}
-        <MdDelete onClick={() => handleDeleteAuthor(author.id)} />
+        <MdDelete onClick={() => handleDeleteAuthor(author)} />
       </div>
       <Button text="Add Author" onClick={() => addAuthorToChosen(author)} />
     </div>

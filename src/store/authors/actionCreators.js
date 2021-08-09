@@ -1,11 +1,16 @@
-import { ADD_AUTHOR, DELETE_AUTHOR } from './actionTypes';
+import { ADD_AUTHOR, ADD_AUTHORS, DELETE_AUTHOR } from "./actionTypes";
 
 export const addAuthor = (author) => ({
-	type: ADD_AUTHOR,
-	payload: author,
+  type: ADD_AUTHOR,
+  payload: author,
+});
+
+export const addAuthors = (authors) => ({
+  type: ADD_AUTHOR,
+  payload: authors,
 });
 
 export const deleteAuthor = (authorId) => ({
-	type: DELETE_AUTHOR,
-	payload: authorId,
+  type: DELETE_AUTHOR,
+  payload: authorId,
 });

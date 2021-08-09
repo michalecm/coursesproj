@@ -71,8 +71,7 @@ export default function CreateCourse({ history }) {
       .then((res) => {
         // eslint-disable-next-line no-console
         console.log(res);
-        setTimeout(3000);
-        dispatch(addAuthor(newCourseData.authorField));
+        setTimeout(dispatch(addAuthor(newCourseData.authorField)), 5000);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

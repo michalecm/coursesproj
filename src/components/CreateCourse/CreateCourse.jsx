@@ -86,7 +86,7 @@ export default function CreateCourse({ history }) {
   }
 
   function handleDeleteAuthor(id) {
-    APIService.Post(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
+    APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
       .then((res) => {
         // eslint-disable-next-line no-console
         console.log(res);
@@ -129,7 +129,7 @@ export default function CreateCourse({ history }) {
   }
 
   const authorsDivs = allAuthors.sort().map((author) => (
-    <div key={`${author.name}key`} className="author-w-button">
+    <div key={`${author.id}key`} className="author-w-button">
       <div className="author-space">
         {author.name}
         <MdDelete onClick={() => handleDeleteAuthor(author.id)} />

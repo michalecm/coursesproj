@@ -16,7 +16,7 @@ export default function CreateCourse({ history }) {
   const auth = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [newCourseData, setNewCourseData] = useState({
-    authorField: { name: "", id: uuidv4() },
+    authorField: "",
     chosenAuthors: [],
     title: "",
     description: "",
@@ -50,7 +50,7 @@ export default function CreateCourse({ history }) {
   function handleCustomAuthorChange(event) {
     setNewCourseData({
       ...newCourseData,
-      authorField: { ...newCourseData.authorField, name: event.target.value },
+      authorField: event.target.value,
     });
   }
 
@@ -63,21 +63,16 @@ export default function CreateCourse({ history }) {
   }
 
   function handleCreateAuthor() {
+    const authorID = uuidv4();
     APIService.Post(
       ENDPOINTS.POST_ADD_AUTHOR,
-      newCourseData.authorField,
+      { name: newCourseData.authorField, id: authorID },
       auth.token
     )
       .then((res) => {
         // eslint-disable-next-line no-console
         console.log(res);
-        setTimeout(() => {
-          dispatch(addAuthor(newCourseData.authorField));
-          setNewCourseData({
-            ...newCourseData,
-            authorField: { name: "", id: uuidv4() },
-          });
-        }, 10000);
+        dispatch(addAuthor({ name: newCourseData.authorField, id: authorID }));
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
@@ -199,7 +194,7 @@ export default function CreateCourse({ history }) {
                 type="text"
                 placeholder="Enter author name..."
                 onChange={handleCustomAuthorChange}
-                value={newCourseData.authorField.name}
+                value={newCourseData.authorField}
               />
             </div>
             <Button

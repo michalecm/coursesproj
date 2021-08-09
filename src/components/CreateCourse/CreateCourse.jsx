@@ -10,6 +10,7 @@ import { ENDPOINTS } from "../../util/consts";
 
 export default function CreateCourse({ history }) {
   const allAuthors = useSelector((state) => state.authorsReducer.authors);
+  const auth = useSelector((state) => state.userReducer);
   const [newCourseData, setNewCourseData] = useState({
     authorField: { name: "", id: "" },
     chosenAuthors: [],
@@ -64,14 +65,18 @@ export default function CreateCourse({ history }) {
 
   function handleCreateCourse(event) {
     event.preventDefault();
-    APIService.Post(ENDPOINTS.POST_ADD_COURSE, {
-      title: newCourseData.title,
-      description: newCourseData.description,
-      creationDate: new Date().toLocaleDateString(),
-      duration: Number(newCourseData.duration),
-      authors: newCourseData.chosenAuthors.map((author) => author.id),
-      id: newCourseData.id,
-    }).then((res) => {
+    APIService.Post(
+      ENDPOINTS.POST_ADD_COURSE,
+      {
+        title: newCourseData.title,
+        description: newCourseData.description,
+        creationDate: new Date().toLocaleDateString(),
+        duration: Number(newCourseData.duration),
+        authors: newCourseData.chosenAuthors.map((author) => author.id),
+        id: newCourseData.id,
+      },
+      auth.token
+    ).then((res) => {
       // eslint-disable-next-line no-console
       console.log(res);
       history.push("/courses");

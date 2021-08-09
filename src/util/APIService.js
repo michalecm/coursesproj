@@ -74,7 +74,10 @@ export default class APIService {
           headers: { Authorization: token },
         })
           .then((res) => res.data)
-          .catch((err) => err);
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.log(err);
+          });
         resolve(response);
       } catch {
         // eslint-disable-next-line no-console

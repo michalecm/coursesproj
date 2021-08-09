@@ -68,7 +68,7 @@ export default function CreateCourse({ history }) {
     const authorID = uuidv4();
     APIService.Post(
       ENDPOINTS.POST_ADD_AUTHOR,
-      { name: newCourseData.authorField, id: authorID },
+      { name: newCourseData.authorField },
       auth.token
     )
       .then((res) => {

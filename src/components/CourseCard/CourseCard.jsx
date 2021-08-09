@@ -28,7 +28,11 @@ export default function CourseCard({
       { id },
       appstate.userReducer.token
     )
-      .then((res) => dispatch(deleteCourse(id)))
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+        dispatch(deleteCourse(id));
+      })
       .catch((err) => {
         // eslint-disable-next-line no-alert
         alert("you are not logged in as admin");

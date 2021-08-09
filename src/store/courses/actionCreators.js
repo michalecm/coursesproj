@@ -7,7 +7,7 @@ export const addCourse = (course) => ({
 
 export const addCourses = (courses) => ({
   type: ADD_COURSE,
-  payload: addCourses,
+  payload: courses,
 });
 
 export const deleteCourse = (courseId) => ({

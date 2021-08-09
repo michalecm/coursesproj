@@ -50,7 +50,7 @@ export default function CreateCourse({ history }) {
   function handleCustomAuthorChange(event) {
     setNewCourseData({
       ...newCourseData,
-      authorField: { name: event.target.value, id: "" },
+      authorField: { name: event.target.value, id: uuidv4() },
     });
   }
 
@@ -63,10 +63,6 @@ export default function CreateCourse({ history }) {
   }
 
   function handleCreateAuthor() {
-    setNewCourseData({
-      ...newCourseData,
-      authorField: { ...newCourseData.authorField, id: uuidv4() },
-    });
     APIService.Post(
       ENDPOINTS.POST_ADD_AUTHOR,
       newCourseData.authorField,

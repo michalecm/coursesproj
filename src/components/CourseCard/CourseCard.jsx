@@ -27,7 +27,7 @@ export default function CourseCard({
     console.log(id);
     APIService.DELETE(
       ENDPOINTS.DELETE_COURSE_BY_ID,
-      { id },
+      id,
       appstate.userReducer.token
     )
       .then((res) => {

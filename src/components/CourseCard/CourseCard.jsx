@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import Button from "../Button/Button";
 import formatDuration, { getCourseAuthors } from "../../util/funcs";
 import { deleteCourse } from "../../store/courses/actionCreators";
@@ -23,8 +23,6 @@ export default function CourseCard({
   const dispatch = useDispatch();
 
   function handleDeleteCourse() {
-    // eslint-disable-next-line no-console
-    console.log(id);
     APIService.DELETE(
       ENDPOINTS.DELETE_COURSE_BY_ID,
       id,
@@ -48,6 +46,7 @@ export default function CourseCard({
       <div className="course-info">
         <div className="course-header">
           <h2>{title}</h2> <MdDelete onClick={handleDeleteCourse}>X</MdDelete>
+          <MdModeEdit onClick={handleDeleteCourse}>X</MdModeEdit>
         </div>
         <div className="course-about">{description}</div>
       </div>

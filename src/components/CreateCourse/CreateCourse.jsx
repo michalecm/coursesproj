@@ -65,7 +65,6 @@ export default function CreateCourse({ history }) {
   function handleCreateAuthor() {
     // eslint-disable-next-line no-debugger
     debugger;
-    const authorID = uuidv4();
     APIService.Post(
       ENDPOINTS.POST_ADD_AUTHOR,
       { name: newCourseData.authorField },

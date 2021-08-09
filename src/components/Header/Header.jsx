@@ -6,20 +6,26 @@ import Logo from "../Logo/Logo";
 import "./Header.css";
 
 export default function Header() {
-  const userName = useSelector((state) => state.userReducer.name);
+  const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   function handleLogout() {
     dispatch(logOut());
     localStorage.removeItem("user");
     window.location.replace("/login");
   }
+
+  const userInfoHeader = user.isAuth ? (
+    <div className="user-info-header">
+      <p>{user.name || ""}</p>
+    </div>
+  ) : (
+    <div />
+  );
   return (
     <div className="header">
       <Logo />
       <div className="header-text-wrapper">
-        <div className="user-info-header">
-          <p>{userName || ""}</p>
-        </div>
+        {userInfoHeader}
         {/* remove user login token */}
         <Button text="Logout" onClick={handleLogout} />
       </div>

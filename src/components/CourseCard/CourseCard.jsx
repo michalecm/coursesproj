@@ -23,6 +23,8 @@ export default function CourseCard({
   const dispatch = useDispatch();
 
   function handleDeleteCourse() {
+    // eslint-disable-next-line no-console
+    console.log(id);
     APIService.DELETE(
       ENDPOINTS.DELETE_COURSE_BY_ID,
       { id },

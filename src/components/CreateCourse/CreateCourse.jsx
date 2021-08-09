@@ -86,17 +86,29 @@ export default function CreateCourse({ history }) {
   }
 
   function handleDeleteAuthor(id) {
+    // eslint-disable-next-line no-console
+    console.log("test 1");
     APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
       .then((res) => {
         // eslint-disable-next-line no-console
+        console.log("test 2");
+        // eslint-disable-next-line no-console
         console.log(res);
+        // eslint-disable-next-line no-console
+        console.log("res just printed");
         if (res.result !== false) {
+          // eslint-disable-next-line no-console
+          console.log(res);
+          // eslint-disable-next-line no-console
+          console.log("dispatching delete author");
           dispatch(deleteAuthor(id));
         }
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
+        // eslint-disable-next-line no-console
+        console.log("we are in error territory");
         // eslint-disable-next-line no-alert
         alert("you are not logged in as admin");
       });

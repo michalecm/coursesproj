@@ -76,11 +76,16 @@ export default function CreateCourse({ history }) {
         id: newCourseData.id,
       },
       auth.token
-    ).then((res) => {
-      // eslint-disable-next-line no-console
-      console.log(res);
-      history.push("/courses");
-    });
+    )
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+        history.push("/courses");
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-alert
+        alert("you are not logged in as admin");
+      });
   }
 
   const authorsDivs = allAuthors.sort().map((author) => (

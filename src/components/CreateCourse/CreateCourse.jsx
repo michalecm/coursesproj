@@ -16,7 +16,7 @@ export default function CreateCourse({ history }) {
   const auth = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [newCourseData, setNewCourseData] = useState({
-    authorField: { name: "", id: "" },
+    authorField: { name: "", id: uuidv4() },
     chosenAuthors: [],
     title: "",
     description: "",
@@ -50,7 +50,7 @@ export default function CreateCourse({ history }) {
   function handleCustomAuthorChange(event) {
     setNewCourseData({
       ...newCourseData,
-      authorField: { name: event.target.value, id: uuidv4() },
+      authorField: { ...newCourseData.authorField, name: event.target.value },
     });
   }
 
@@ -73,6 +73,10 @@ export default function CreateCourse({ history }) {
         console.log(res);
         setTimeout(() => {
           dispatch(addAuthor(newCourseData.authorField));
+          setNewCourseData({
+            ...newCourseData,
+            authorField: { name: "", id: uuidv4() },
+          });
         }, 10000);
       })
       .catch((err) => {
@@ -83,10 +87,10 @@ export default function CreateCourse({ history }) {
       });
   }
 
-  function handleDeleteAuthor(author) {
+  function handleDeleteAuthor(id) {
     // eslint-disable-next-line no-console
-    console.log(author);
-    APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, author.id, auth.token)
+    console.log(id);
+    APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
       .then((res) => {
         // eslint-disable-next-line no-console
         console.log("test 2");
@@ -99,7 +103,7 @@ export default function CreateCourse({ history }) {
           console.log(res);
           // eslint-disable-next-line no-console
           console.log("dispatching delete author");
-          dispatch(deleteAuthor(author.id));
+          dispatch(deleteAuthor(id));
         }
       })
       .catch((err) => {
@@ -144,7 +148,7 @@ export default function CreateCourse({ history }) {
     <div key={`${author.id}key`} className="author-w-button">
       <div className="author-space">
         {author.name}
-        <MdDelete onClick={() => handleDeleteAuthor(author)} />
+        <MdDelete onClick={() => handleDeleteAuthor(author.id)} />
       </div>
       <Button text="Add Author" onClick={() => addAuthorToChosen(author)} />
     </div>

@@ -129,7 +129,7 @@ export default function CreateCourse({ history }) {
       !(
         newCourseData.duration > 0 &&
         newCourseData.title.length > 0 &&
-        newCourseData.description > 0 &&
+        newCourseData.description.length > 0 &&
         newCourseData.chosenAuthors.length > 0
       )
     ) {

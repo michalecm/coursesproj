@@ -115,15 +115,15 @@ export default function CreateCourse({ history }) {
   }
 
   function handleCreateCourse(event) {
+    // eslint-disable-next-line no-console
+    console.log(
+      `duration > 0: ${newCourseData.duration > 0} 
+				\ntitle > 0: ${newCourseData.title.length > 0}
+				\ndescription > 0: ${newCourseData.description > 0}
+				\nchosenAuthors > 0: ${newCourseData.chosenAuthors.length > 0}`
+    );
     // eslint-disable-next-line no-debugger
     debugger;
-    console.log(
-      `duration > 0: ${newCourseData.duration}` >
-        `${0}title > 0: ${newCourseData.title.length}` >
-        `${0}description > 0: ${newCourseData.description}` >
-        `${0}chosenAuthors > 0: ${newCourseData.chosenAuthors.length}` >
-        `${0}`
-    );
     event.preventDefault();
     if (
       !(

@@ -159,10 +159,7 @@ export default function CreateCourse({ history }) {
     <div key={`${author.id}keychosen`} className="author-w-button">
       <div className="author-space">{author.name}</div>
       <div className="delete-add-buttons-div">
-        <Button
-          text="Remove Author"
-          onClick={() => removeAuthorFromChosen(author)}
-        />
+        <Button text="Remove" onClick={() => removeAuthorFromChosen(author)} />
       </div>
     </div>
   ));

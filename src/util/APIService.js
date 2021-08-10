@@ -49,7 +49,7 @@ export default class APIService {
   static Post(endpoint, rawdata = {}, token = "") {
     return new Promise((resolve, reject) => {
       try {
-        const response = axios({
+        axios({
           method: "post",
           url: `${this.url + endpoint}`,
           data: rawdata,

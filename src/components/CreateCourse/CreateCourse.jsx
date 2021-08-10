@@ -156,7 +156,7 @@ export default function CreateCourse({ history }) {
   ));
 
   const courseAuthorsDivs = newCourseData.chosenAuthors.map((author) => (
-    <div className="author-w-button">
+    <div key={`${author.id}keychosen`} className="author-w-button">
       <div className="author-space">{author.name}</div>
       <div className="delete-add-buttons-div">
         <Button

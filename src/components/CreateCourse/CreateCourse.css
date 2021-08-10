@@ -63,12 +63,14 @@
 .cc-bottom-left {
   align-items: flex-start;
   align-content: flex-start;
+  justify-content: center;
 }
 
 .author-w-button {
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
+  align-items: center;
 }
 
 .delete-add-buttons-div {
@@ -83,4 +85,5 @@
 .delete-add-buttons-div > svg.icons {
   height: 1.5em;
   width: 1.5em;
+  margin-left: 32px;
 }

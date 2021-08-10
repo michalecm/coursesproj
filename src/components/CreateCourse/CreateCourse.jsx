@@ -116,6 +116,20 @@ export default function CreateCourse({ history }) {
 
   function handleCreateCourse(event) {
     event.preventDefault();
+    if (
+      !(
+        newCourseData.duration > 0 &&
+        newCourseData.title.length > 0 &&
+        newCourseData.description > 0 &&
+        newCourseData.chosenAuthors.length > 0
+      )
+    ) {
+      // eslint-disable-next-line no-alert
+      alert(
+        "Please fill out all fields. Courses must have a duration and an author."
+      );
+      return;
+    }
     APIService.Post(
       ENDPOINTS.POST_ADD_COURSE,
       {

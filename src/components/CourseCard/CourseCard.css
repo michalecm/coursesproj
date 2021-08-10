@@ -89,7 +89,6 @@
 .edit-delete-buttons {
   display: flex;
   flex-direction: row;
-  height: 100%;
 }
 
 .edit-delete-buttons > svg.icons {

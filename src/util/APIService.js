@@ -23,8 +23,8 @@ export default class APIService {
         try {
           const response = axios
             .get(`${this.url + endpoint}/?${query}`)
-            .then((res) => res.data.result)
-            .catch((err) => err);
+            .then((res) => resolve(res.data.result))
+            .catch((err) => reject(err));
           resolve(response);
         } catch {
           const response = "failed to get";
@@ -34,11 +34,10 @@ export default class APIService {
     }
     return new Promise((resolve, reject) => {
       try {
-        const response = axios
+        axios
           .get(`${this.url + endpoint}`)
-          .then((res) => res.data.result)
-          .catch((err) => err);
-        resolve(response);
+          .then((res) => resolve(res.data.result))
+          .catch((err) => reject(err));
       } catch {
         const response = "failed to get";
         reject(response);
@@ -71,7 +70,7 @@ export default class APIService {
   static DELETE(endpoint, specifier = "", token = "") {
     return new Promise((resolve, reject) => {
       try {
-        const response = axios({
+        axios({
           method: "delete",
           url: `${`${this.url + endpoint}/${specifier}`}`,
           headers: { Authorization: token },
@@ -81,8 +80,6 @@ export default class APIService {
             reject(err);
           });
       } catch {
-        // eslint-disable-next-line no-console
-        console.log("we about to reject");
         const response = "failed to delete";
         reject(response);
       }

@@ -46,12 +46,6 @@ export default function CourseCard({
       <div className="course-info">
         <div className="course-header">
           <h2>{title}</h2> 
-          <MdDelete className="icons" onClick={handleDeleteCourse}>
-            X
-          </MdDelete>
-          <MdModeEdit className="icons" onClick={handleDeleteCourse}>
-            X
-          </MdModeEdit>
         </div>
         <div className="course-about">{description}</div>
       </div>
@@ -72,23 +66,29 @@ export default function CourseCard({
             <div>{creationDate}</div>
           </div>
         </div>
-        <Link
-          to={{
-            pathname: `/courses/${id}`,
-            state: {
-              myData: {
-                id,
-                title,
-                description,
-                creationDate,
-                duration,
-                authors,
+        <div className="cc-button-icon-wrapper">
+          <Link
+            to={{
+              pathname: `/courses/${id}`,
+              state: {
+                myData: {
+                  id,
+                  title,
+                  description,
+                  creationDate,
+                  duration,
+                  authors,
+                },
               },
-            },
-          }}
-        >
-          <Button text="Show course" />
-        </Link>
+            }}
+          >
+            <Button text="Show course" />
+          </Link>
+          <div className="edit-delete-buttons">
+            <MdDelete className="icons" onClick={handleDeleteCourse} />
+            <MdModeEdit className="icons" onClick={handleDeleteCourse} />
+          </div>
+        </div>
       </div>
     </div>
   );

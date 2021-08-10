@@ -68,4 +68,15 @@
 
 .icons {
   cursor: pointer;
+  margin: 0 8px;
+}
+
+.cc-button-icon-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  flex-direction: row;
 }

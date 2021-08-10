@@ -70,3 +70,14 @@
   flex-direction: row;
   margin-bottom: 12px;
 }
+
+.delete-add-buttons-div {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+}
+
+.delete-add-buttons-div > svg.icons {
+  height: 1.5em;
+  width: 1.5em;
+}

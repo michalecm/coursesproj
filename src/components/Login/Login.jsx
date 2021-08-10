@@ -27,7 +27,7 @@ export default function Login({ history }) {
 
   function processLogin(event) {
     event.preventDefault();
-    if (!validateEmail(loginState.email) || loginState.password.length > 0) {
+    if (!validateEmail(loginState.email) || !loginState.password.length > 0) {
       // eslint-disable-next-line no-alert
       alert("Your password or email is invalid.");
       return;

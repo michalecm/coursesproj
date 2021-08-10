@@ -63,7 +63,6 @@
 .cc-bottom-left {
   align-items: flex-start;
   align-content: flex-start;
-  justify-content: center;
 }
 
 .author-w-button {
@@ -82,8 +81,16 @@
   align-content: center;
 }
 
+.author-w-button > .author-space {
+  width: 40%;
+}
+
 .delete-add-buttons-div > svg.icons {
   height: 1.5em;
   width: 1.5em;
-  margin-left: 32px;
+  margin-left: 25px;
+}
+
+textarea {
+  padding: 2px;
 }

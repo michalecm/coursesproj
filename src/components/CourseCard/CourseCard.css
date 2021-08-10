@@ -69,6 +69,7 @@
 .icons {
   cursor: pointer;
   margin: 0 12px;
+  height: 100%;
 }
 
 .cc-button-icon-wrapper {
@@ -79,12 +80,15 @@
   align-items: center;
 }
 
-.edit-delete-buttons {
-  display: flex;
-  flex-direction: row;
+.delete-add-buttons-div {
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  flex-direction: row;
   height: 100%;
 }
 

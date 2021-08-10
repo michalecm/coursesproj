@@ -158,10 +158,16 @@ export default function CreateCourse({ history }) {
   const courseAuthorsDivs = newCourseData.chosenAuthors.map((author) => (
     <div className="author-w-button">
       <div className="author-space">{author.name}</div>
-      <Button
-        text="Delete Author"
-        onClick={() => removeAuthorFromChosen(author)}
-      />
+      <div className="delete-add-buttons-div">
+        <Button
+          text="Delete Author"
+          onClick={() => removeAuthorFromChosen(author)}
+        />
+        <MdDelete
+          className="icons"
+          onClick={() => removeAuthorFromChosen(author.id)}
+        />
+      </div>
     </div>
   ));
 

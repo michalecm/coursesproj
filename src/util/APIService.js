@@ -58,14 +58,13 @@ export default class APIService {
           .then((res) => {
             // eslint-disable-next-line no-console
             console.dir(res);
-            return res.data;
+            resolve(response);
           })
           .catch((err) => {
             // eslint-disable-next-line no-console
             console.dir(err);
-            return err;
+            reject(err);
           });
-        resolve(response);
       } catch {
         const response = "failed to post";
         reject(response);

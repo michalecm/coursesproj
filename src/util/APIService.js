@@ -56,13 +56,9 @@ export default class APIService {
           headers: { Authorization: token },
         })
           .then((res) => {
-            // eslint-disable-next-line no-console
-            console.dir(res);
-            resolve(response);
+            resolve(res.data);
           })
           .catch((err) => {
-            // eslint-disable-next-line no-console
-            console.dir(err);
             reject(err);
           });
       } catch {
@@ -80,12 +76,10 @@ export default class APIService {
           url: `${`${this.url + endpoint}/${specifier}`}`,
           headers: { Authorization: token },
         })
-          .then((res) => res.data)
+          .then((res) => resolve(res.data))
           .catch((err) => {
-            // eslint-disable-next-line no-console
-            console.log(err);
+            reject(err);
           });
-        resolve(response);
       } catch {
         // eslint-disable-next-line no-console
         console.log("we about to reject");

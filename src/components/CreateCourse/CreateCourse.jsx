@@ -115,6 +115,8 @@ export default function CreateCourse({ history }) {
   }
 
   function handleCreateCourse(event) {
+    // eslint-disable-next-line no-debugger
+    debugger;
     event.preventDefault();
     if (
       !(

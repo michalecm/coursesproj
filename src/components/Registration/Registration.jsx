@@ -32,6 +32,7 @@ export default function Registration({ history }) {
   }
 
   function processFormSubmit(event) {
+    event.preventDefault();
     if (
       !(
         validateEmail(registrationState.email) &&
@@ -43,14 +44,13 @@ export default function Registration({ history }) {
       alert("Please enter a valid email address, name, and password.");
       return;
     }
-    event.preventDefault();
     APIService.Post(ENDPOINTS.POST_REGISTER, {
       name: registrationState.name,
       email: registrationState.email,
       password: registrationState.password,
     })
       .then(() => {
-        history.push("/courses");
+        history.push("/login");
       })
       .catch((err) => {
         // eslint-disable-next-line no-alert

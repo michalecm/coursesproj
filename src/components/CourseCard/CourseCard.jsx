@@ -86,12 +86,12 @@ export default function CourseCard({
           </Link>
           <div className="edit-delete-buttons">
             <MdDelete
-              fontSize="1.5em"
+              fontSize="2.5em"
               className="icons"
               onClick={handleDeleteCourse}
             />
             <MdModeEdit
-              fontSize="1.5em"
+              fontSize="2.5em"
               className="icons"
               onClick={handleDeleteCourse}
             />

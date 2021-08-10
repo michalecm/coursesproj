@@ -147,7 +147,10 @@ export default function CreateCourse({ history }) {
       <div className="author-space">{author.name}</div>
       <div className="delete-add-buttons-div">
         <Button text="Add Author" onClick={() => addAuthorToChosen(author)} />
-        <MdDelete onClick={() => handleDeleteAuthor(author.id)} />
+        <MdDelete
+          className="icons"
+          onClick={() => handleDeleteAuthor(author.id)}
+        />
       </div>
     </div>
   ));

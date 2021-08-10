@@ -71,8 +71,7 @@
   margin-bottom: 12px;
   align-items: center;
 }
-
-.delete-add-buttons-div {
+s .delete-add-buttons-div {
   display: flex;
   flex-direction: row;
   padding: 8px;

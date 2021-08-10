@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import APIService from "../../util/APIService";
@@ -178,6 +179,9 @@ export default function CreateCourse({ history }) {
 
   return (
     <form className="create-course-wrapper" onSubmit={handleCreateCourse}>
+      <div className="backlink">
+        <Link to="/courses"> &#60; Back to courses </Link>
+      </div>
       <div className="create-course-top">
         <div className="create-course-title-entry-wrapper">
           <div className="create-course-title-form">

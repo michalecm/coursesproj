@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../Button/Button";
 import { ENDPOINTS } from "../../util/consts";
+import { validateEmail } from "../../util/funcs";
 import { logIn } from "../../store/users/actionCreators";
 import "./Login.css";
 import APIService from "../../util/APIService";
@@ -25,6 +26,11 @@ export default function Login({ history }) {
   }
 
   function processLogin(event) {
+    if (!validateEmail(loginState.email) || loginState.password.length > 0) {
+      // eslint-disable-next-line no-alert
+      alert("Your password or email is invalid.");
+      return;
+    }
     event.preventDefault();
     APIService.Post(ENDPOINTS.POST_LOGIN, {
       email: loginState.email,
@@ -37,7 +43,7 @@ export default function Login({ history }) {
         dispatch(
           logIn({
             email: loginState.email,
-            name: res.user.name ? res.user.name : "",
+            name: res.user.name ? res.user.name : "admin",
             isAuth: res.successful,
             token: res.result,
           })

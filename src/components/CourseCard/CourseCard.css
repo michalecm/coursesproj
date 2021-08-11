@@ -1,0 +1,97 @@
+.course-info {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  padding-left: 10px;
+}
+
+.course-card-wrapper {
+  width: auto;
+  min-height: 158px;
+  height: auto;
+  border: 2px solid blueviolet;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+}
+
+.course-meta-info {
+  width: 230px;
+}
+
+.course-meta-info > a > .app-button {
+  margin-top: 12px;
+}
+.course-meta-info,
+.course-metadata {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.subject-left-info-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 4px 0;
+}
+
+.course-header h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.course-about {
+  padding-right: 25px;
+}
+
+.left-right-header {
+  margin-right: 8px;
+}
+
+.course-meta-info > .app-button {
+  margin-top: 8px;
+  align-self: center;
+}
+
+.course-metadata {
+  margin-top: 17px;
+}
+
+.authors {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icons {
+  cursor: pointer;
+  margin: 0 12px;
+  height: 100%;
+}
+
+.cc-button-icon-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+  align-items: center;
+}
+
+.delete-add-buttons-div {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-delete-buttons > svg.icons {
+  height: 1.5em;
+  width: 1.5em;
+}

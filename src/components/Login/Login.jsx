@@ -54,6 +54,8 @@ export default function Login({ history }) {
           localStorage.getItem("user")
         )
           .then((resp) => {
+            // eslint-disable-next-line no-console
+            console.log(resp);
             dispatch(getRole(resp.role));
           })
           .catch((err) => {

@@ -87,7 +87,9 @@ export default function CourseCard({
           {appstate.userReducer.role === "admin" && (
             <div className="edit-delete-buttons">
               <MdDelete className="icons" onClick={handleDeleteCourse} />
-              <MdModeEdit className="icons" onClick={handleDeleteCourse} />
+              <Link to="/courses/update/">
+                <MdModeEdit className="icons" />
+              </Link>
             </div>
           )}
         </div>

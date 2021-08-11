@@ -48,7 +48,11 @@ export default function Login({ history }) {
             token: res.result,
           })
         );
-        APIService.Get(ENDPOINTS.GET_CURRENT_USER, localStorage.getItem("user"))
+        APIService.Get(
+          ENDPOINTS.GET_CURRENT_USER,
+          {},
+          localStorage.getItem("user")
+        )
           .then((resp) => {
             dispatch(getRole(resp.role));
           })

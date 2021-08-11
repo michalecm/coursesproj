@@ -6,7 +6,7 @@ export default class APIService {
 
   static data = {};
 
-  static Get(endpoint, queries = {}) {
+  static Get(endpoint, queries = {}, token = "") {
     if (
       !(
         queries &&
@@ -22,7 +22,10 @@ export default class APIService {
           .join("&");
         try {
           axios
-            .get(`${this.url + endpoint}/?${query}`)
+            .get(
+              `${this.url + endpoint}/?${query}`,
+              token ? { headers: { Authorization: token } } : {}
+            )
             .then((res) => resolve(res.data ? res.data.result : res.result))
             .catch((err) => reject(err));
         } catch {
@@ -34,7 +37,10 @@ export default class APIService {
     return new Promise((resolve, reject) => {
       try {
         axios
-          .get(`${this.url + endpoint}`)
+          .get(
+            `${this.url + endpoint}`,
+            token ? { headers: { Authorization: token } } : {}
+          )
           .then((res) => resolve(res.data ? res.data.result : res.result))
           .catch((err) => reject(err));
       } catch {

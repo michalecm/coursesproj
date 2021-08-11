@@ -7,7 +7,7 @@ import Courses from "./components/Courses/Courses";
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
-import CreateCourse from "./components/CreateCourse/CreateCourse";
+import CourseForm from "./components/CourseForm/CourseForm";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
 import { ENDPOINTS } from "./util/consts";
 import APIService from "./util/APIService";
@@ -69,7 +69,7 @@ function App() {
         <Switch>
           <PropsRoute exact path="/courses" component={Courses} />
           <Route path={["/", "/login"]} exact component={Login} />
-          <PropsRoute exact path="/courses/add" component={CreateCourse} />
+          <PropsRoute exact path="/courses/add" component={CourseForm} />
           <Route path="/register" exact component={Registration} />
           <PropsRoute exact path="/courses/:id" component={CourseInfo} />
         </Switch>

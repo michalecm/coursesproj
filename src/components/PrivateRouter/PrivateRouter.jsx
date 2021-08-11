@@ -1,33 +1,33 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function PrivateRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      /* eslint-disable react/jsx-props-no-spreading */
-      {...rest}
-      render={(props) =>
-        localStorage.getItem("user") ? (
-          /* eslint-disable react/jsx-props-no-spreading */
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: props.linkto,
-            }}
-          />
-        )
-      }
-    />
-  );
+	return (
+		<Route
+			/* eslint-disable react/jsx-props-no-spreading */
+			{...rest}
+			render={(props) =>
+				localStorage.getItem('user') ? (
+					/* eslint-disable react/jsx-props-no-spreading */
+					<Component {...props} />
+				) : (
+					<Redirect
+						to={{
+							pathname: props.linkto,
+						}}
+					/>
+				)
+			}
+		/>
+	);
 }
 
 PrivateRoute.propTypes = {
-  component: PropTypes.elementType.isRequired,
-  linkto: PropTypes.string,
+	component: PropTypes.elementType.isRequired,
+	linkto: PropTypes.string,
 };
 
 PrivateRoute.defaultProps = {
-  linkto: "/login",
+	linkto: '/login',
 };

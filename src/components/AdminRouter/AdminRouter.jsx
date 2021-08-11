@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 export default function AdminRoute({ component: Component, ...rest }) {
   const isAdmin = useSelector((state) => state.userReducer);
   // eslint-disable-next-line no-console
-  console.log(isAdmin.role + " " + isAdmin.name);
+  console.log(`${isAdmin.role} ${isAdmin.name}`);
+  console.log(`${isAdmin.role === "admin"}`);
   return (
     <Route
       /* eslint-disable react/jsx-props-no-spreading */

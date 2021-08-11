@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 export default function AdminRoute({ component: Component, ...rest }) {
+  // eslint-disable-next-line no-debugger
+  debugger;
   const isAdmin = useSelector((state) => state.userReducer);
   // eslint-disable-next-line no-console
   console.log(`${isAdmin.role} ${isAdmin.name}`);

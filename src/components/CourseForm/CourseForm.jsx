@@ -13,9 +13,8 @@ import { addCourse, updateCourse } from "../../store/courses/actionCreators";
 import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";
 
 export default function CourseForm({ history }) {
-  const { slug } = useParams();
-  // esline-disable-next-line no-console
-  console.log(useParams());
+  const { id: slug } = useParams();
+
   const currentPath = useLocation();
   const isUpdating =
     matchPath(currentPath.pathname, {
@@ -23,8 +22,7 @@ export default function CourseForm({ history }) {
       exact: true,
       strict: true,
     }) !== null;
-  // eslint-disable-next-line no-console
-  console.log(`${currentPath.pathname} `.concat(`courses/update/:id`));
+
   const allAuthors = useSelector((state) => state.authorsReducer.authors);
   const allCourses = useSelector((state) => state.coursesReducer.courses);
   const auth = useSelector((state) => state.userReducer);

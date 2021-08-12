@@ -38,6 +38,10 @@ export default function CourseForm({ history }) {
 
   if (auth.role === "admin") {
     // const data = allCourses.filter((course) => course.id === slug);
+    // eslint-disable-next-line no-console
+    console.dir(allCourses);
+    // eslint-disable-next-line no-console
+    console.dir(allCourses.length);
     for (const course in allCourses) {
       if (true) {
         // eslint-disable-next-line no-console

@@ -38,9 +38,13 @@ export default function CourseForm({ history }) {
 
   if (auth.role === "admin") {
     const data = allCourses.filter((course) => course.id === slug);
+    const updateAuthors = data.authors.map((authorID) => ({
+      name: allAuthors.filter((authorvar) => authorvar.id === authorID).name,
+      id: authorID,
+    }));
     setNewCourseData({
       authorField: "",
-      chosenAuthors: data.authors,
+      chosenAuthors: updateAuthors,
       title: data.title,
       description: data.description,
       duration: data.duration,

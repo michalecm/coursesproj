@@ -9,7 +9,7 @@ import Input from "../Input/Input";
 import APIService from "../../util/APIService";
 import "./CourseForm.css";
 import { ENDPOINTS } from "../../util/consts";
-import { addCourse } from "../../store/courses/actionCreators";
+import { addCourse, updateCourse } from "../../store/courses/actionCreators";
 import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";
 
 export default function CourseForm({ history }) {
@@ -140,6 +140,48 @@ export default function CourseForm({ history }) {
       });
   }
 
+  function handleCourseUpdate(event) {
+    event.preventDefault();
+    if (
+      !(
+        newCourseData.duration > 0 &&
+        newCourseData.title.length > 0 &&
+        newCourseData.description.length > 0 &&
+        newCourseData.chosenAuthors.length > 0
+      )
+    ) {
+      // eslint-disable-next-line no-alert
+      alert(
+        "Please fill out all fields. Courses must have a duration and an author."
+      );
+      return;
+    }
+    APIService.Put(
+      ENDPOINTS.PUT_COURSE_BY_ID,
+      {
+        title: newCourseData.title,
+        description: newCourseData.description,
+        creationDate: new Date().toLocaleDateString(),
+        duration: Number(newCourseData.duration),
+        authors: newCourseData.chosenAuthors.map((author) => author.id),
+        id: newCourseData.id,
+      },
+      auth.token
+    )
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+        dispatch(updateCourse(res.result));
+        history.push("/courses");
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+        // eslint-disable-next-line no-alert
+        alert("you are not logged in as admin");
+      });
+  }
+
   function handleCourseForm(event) {
     event.preventDefault();
     if (
@@ -205,7 +247,10 @@ export default function CourseForm({ history }) {
   ));
 
   return (
-    <form className="create-course-wrapper" onSubmit={handleCourseForm}>
+    <form
+      className="create-course-wrapper"
+      onSubmit={isUpdating ? handleCourseUpdate : handleCourseForm}
+    >
       <div className="backlink">
         <Link to="/courses"> &#60; Back to courses </Link>
       </div>
@@ -221,7 +266,11 @@ export default function CourseForm({ history }) {
             />
           </div>
           <div className="create-course-title-button">
-            <Button className="app-button" text="Create Course" type="submit" />
+            <Button
+              className="app-button"
+              text={isUpdating ? "Update Course" : "Create Course"}
+              type="submit"
+            />
           </div>
         </div>
         <div className="create-course-description-wrapper">

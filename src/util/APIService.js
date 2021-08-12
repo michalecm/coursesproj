@@ -26,6 +26,17 @@ export default class APIService {
 			.catch((err) => err);
 	}
 
+	static Put(endpoint, rawdata = {}, token = '') {
+		return axios({
+			method: 'put',
+			url: `${this.url + endpoint}`,
+			data: rawdata,
+			headers: { Authorization: token },
+		})
+			.then((res) => res.data)
+			.catch((err) => err);
+	}
+
 	static DELETE(endpoint, specifier = '', token = '') {
 		return axios({
 			method: 'delete',

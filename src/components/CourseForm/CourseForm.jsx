@@ -20,7 +20,9 @@ export default function CourseForm({ history }) {
       path: "/courses/update/:id",
       exact: true,
       strict: true,
-    }).isExact === true;
+    }) !== null;
+  // eslint-disable-next-line no-console
+  console.log(currentPath.pathname + " " + "courses/update/:id");
   const allAuthors = useSelector((state) => state.authorsReducer.authors);
   const allCourses = useSelector((state) => state.coursesReducer.courses);
   const auth = useSelector((state) => state.userReducer);

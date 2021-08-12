@@ -48,7 +48,7 @@ export default function CourseForm({ history }) {
         console.dir(data);
         const updateAuthors = retrieveAuthorNames(data.authors, allAuthors);
         // eslint-disable-next-line no-console
-        console.dir(`${updateAuthors} ${data.authors} ${allAuthors}`);
+        console.dir(updateAuthors);
 
         setNewCourseData({
           authorField: "",

@@ -14,6 +14,8 @@ import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";
 
 export default function CourseForm({ history }) {
   const { slug } = useParams();
+  // esline-disable-next-line no-console
+  console.log(useParams());
   const currentPath = useLocation();
   const isUpdating =
     matchPath(currentPath.pathname, {

@@ -46,7 +46,9 @@ export default function CourseForm({ history }) {
         [data] = data;
         // eslint-disable-next-line no-console
         console.dir(data);
-        const updateAuthors = retrieveAuthorNames(data.authors, allAuthors);
+        const updateAuthors = allAuthors.filter((a) =>
+          data.authors.includes(a.id)
+        );
         // eslint-disable-next-line no-console
         console.dir(updateAuthors);
 

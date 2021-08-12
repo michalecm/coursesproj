@@ -39,13 +39,13 @@ export default function CourseForm({ history }) {
   if (auth.role === "admin") {
     // const data = allCourses.filter((course) => course.id === slug);
     // eslint-disable-next-line no-console
-    console.dir(allCourses);
+    console.dir(allCourses); // prints the actual courses
     // eslint-disable-next-line no-console
-    console.dir(allCourses.length);
-    for (const course in allCourses) {
+    console.dir(allCourses.length); // prints "2"
+    for (const course of allCourses) {
       if (true) {
         // eslint-disable-next-line no-console
-        console.dir(`${course.id} ${slug}`);
+        console.dir(`${course.id} ${slug}`); // prints undefined undefined
       }
     }
     // eslint-disable-next-line no-console

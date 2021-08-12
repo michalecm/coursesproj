@@ -37,7 +37,7 @@ export default function CourseForm({ history }) {
   });
 
   if (auth.role === "admin") {
-    const data = allCourses.filter((course) => course.id === slug);
+    // const data = allCourses.filter((course) => course.id === slug);
     for (const course in allCourses) {
       if (true) {
         // eslint-disable-next-line no-console
@@ -45,19 +45,19 @@ export default function CourseForm({ history }) {
       }
     }
     // eslint-disable-next-line no-console
-    console.dir(data);
-    const updateAuthors = data.authors.map((authorID) => ({
-      name: allAuthors.filter((authorvar) => authorvar.id === authorID).name,
-      id: authorID,
-    }));
-    setNewCourseData({
-      authorField: "",
-      chosenAuthors: updateAuthors,
-      title: data.title,
-      description: data.description,
-      duration: data.duration,
-      id: data.duration,
-    });
+    // console.dir(data);
+    // const updateAuthors = data.authors.map((authorID) => ({
+    // 	name: allAuthors.filter((authorvar) => authorvar.id === authorID).name,
+    // 	id: authorID,
+    // }));
+    // setNewCourseData({
+    // 	authorField: '',
+    // 	chosenAuthors: updateAuthors,
+    // 	title: data.title,
+    // 	description: data.description,
+    // 	duration: data.duration,
+    // 	id: data.duration,
+    // });
   }
 
   function addAuthorToChosen(newAuthor) {

@@ -8,7 +8,6 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import APIService from "../../util/APIService";
 import "./CourseForm.css";
-import { retrieveAuthorNames } from "../../util/funcs";
 import { ENDPOINTS } from "../../util/consts";
 import { addCourse, updateCourse } from "../../store/courses/actionCreators";
 import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";

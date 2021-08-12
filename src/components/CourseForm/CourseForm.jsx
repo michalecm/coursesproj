@@ -37,15 +37,10 @@ export default function CourseForm({ history }) {
   });
 
   if (auth.role === "admin") {
-    // const data = allCourses.filter((course) => course.id === slug);
-    // eslint-disable-next-line no-console
-    console.dir(allCourses); // prints the actual courses
-    // eslint-disable-next-line no-console
-    console.dir(allCourses.length); // prints "2"
     for (const course of allCourses) {
       if (true) {
         // eslint-disable-next-line no-console
-        console.dir(`${course.id} ${slug}`); // prints undefined undefined
+        console.log(`${course.id} ${slug}`); // prints id && undefined
       }
     }
     // eslint-disable-next-line no-console

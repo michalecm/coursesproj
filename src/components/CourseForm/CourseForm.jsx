@@ -57,7 +57,7 @@ export default function CourseForm({ history }) {
           title: data.title,
           description: data.description,
           duration: data.duration,
-          id: data.duration,
+          id: data.id,
         });
       }
     }

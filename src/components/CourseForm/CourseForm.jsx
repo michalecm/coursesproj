@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
@@ -36,28 +36,31 @@ export default function CourseForm({ history }) {
     id: uuidv4(),
   });
 
-  if (auth.role === "admin") {
-    let data = allCourses.filter((course) => course.id === slug);
-    if (!data.length > 0) {
-      history.push("/courses");
-    } else {
-      [data] = data;
-      // eslint-disable-next-line no-console
-      console.dir(data);
-      const updateAuthors = data.authors.map((authorID) => ({
-        name: allAuthors.filter((authorvar) => authorvar.id === authorID).name,
-        id: authorID,
-      }));
-      setNewCourseData({
-        authorField: "",
-        chosenAuthors: updateAuthors,
-        title: data.title,
-        description: data.description,
-        duration: data.duration,
-        id: data.duration,
-      });
+  useEffect(() => {
+    if (auth.role === "admin") {
+      let data = allCourses.filter((course) => course.id === slug);
+      if (!data.length > 0) {
+        history.push("/courses");
+      } else {
+        [data] = data;
+        // eslint-disable-next-line no-console
+        console.dir(data);
+        const updateAuthors = data.authors.map((authorID) => ({
+          name: allAuthors.filter((authorvar) => authorvar.id === authorID)
+            .name,
+          id: authorID,
+        }));
+        setNewCourseData({
+          authorField: "",
+          chosenAuthors: updateAuthors,
+          title: data.title,
+          description: data.description,
+          duration: data.duration,
+          id: data.duration,
+        });
+      }
     }
-  }
+  }, [allCourses, allAuthors, auth.role, history, slug]);
 
   function addAuthorToChosen(newAuthor) {
     if (newCourseData.chosenAuthors.includes(newAuthor)) {

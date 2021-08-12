@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { MdDelete, MdTurnedInNot } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useParams, matchPath, useLocation } from "react-router-dom";
 import Button from "../Button/Button";
@@ -15,7 +15,7 @@ import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";
 export default function CourseForm({ history }) {
   const { slug } = useParams();
   const currentPath = useLocation();
-  const match =
+  const isUpdating =
     matchPath(currentPath.pathname, {
       path: "/courses/update/:id",
       exact: true,

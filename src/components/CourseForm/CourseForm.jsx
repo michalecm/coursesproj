@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import APIService from "../../util/APIService";
 import "./CourseForm.css";
+import { retrieveAuthorNames } from "../../util/funcs";
 import { ENDPOINTS } from "../../util/consts";
 import { addCourse, updateCourse } from "../../store/courses/actionCreators";
 import { deleteAuthor, addAuthor } from "../../store/authors/actionCreators";
@@ -45,11 +46,7 @@ export default function CourseForm({ history }) {
         [data] = data;
         // eslint-disable-next-line no-console
         console.dir(data);
-        const updateAuthors = data.authors.map((authorID) => ({
-          name: allAuthors.filter((authorvar) => authorvar.id === authorID)
-            .name,
-          id: authorID,
-        }));
+        const updateAuthors = retrieveAuthorNames(data.authors, allAuthors);
         setNewCourseData({
           authorField: "",
           chosenAuthors: updateAuthors,

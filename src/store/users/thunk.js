@@ -26,7 +26,7 @@ export const postLogIn = (userData) => (dispatch) => {
       };
       localStorage.setItem("user", res.result);
       // eslint-disable-next-line no-console
-      console.log(localStorage.get("user"));
+      console.log(localStorage.getItem("user"));
       dispatch(logIn(data));
       dispatch(getUserRole());
     })

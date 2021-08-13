@@ -61,7 +61,7 @@ export default function CourseForm({ history }) {
         });
       }
     }
-  }, [allCourses, allAuthors, auth.role, history, slug]);
+  }, [allCourses, allAuthors, auth.role, history, isUpdating, slug]);
 
   function addAuthorToChosen(newAuthor) {
     if (newCourseData.chosenAuthors.includes(newAuthor)) {

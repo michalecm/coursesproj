@@ -2,9 +2,9 @@ import APIService from "../../util/APIService";
 import { ENDPOINTS } from "../../util/consts";
 import { addAuthor, addAuthors, deleteAuthor } from "./actionCreators";
 
-export const getAllAuthors = () =>
+export const getAllAuthors = (dispatch) =>
   APIService.Get(ENDPOINTS.GET_ALL_AUTHORS)
-    .then((authors) => addAuthors(authors))
+    .then((authors) => dispatch(addAuthors(authors)))
     .catch((err) => {
       // eslint-disable-next-line no-alert
       alert("you are not logged in as admin");

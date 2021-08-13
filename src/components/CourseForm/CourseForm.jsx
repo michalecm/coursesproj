@@ -36,7 +36,7 @@ export default function CourseForm({ history }) {
 
   useEffect(() => {
     history.push("/courses");
-  }, [allCourses]);
+  }, [history, allCourses]);
 
   useEffect(() => {
     if (auth.role === "admin" && isUpdating) {

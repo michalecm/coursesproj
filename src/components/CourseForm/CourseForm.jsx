@@ -37,7 +37,7 @@ export default function CourseForm({ history }) {
   });
 
   useEffect(() => {
-    if (auth.role === "admin") {
+    if (auth.role === "admin" && isUpdating) {
       let data = allCourses.filter((course) => course.id === slug);
       if (!data.length > 0) {
         history.push("/courses");

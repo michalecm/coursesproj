@@ -33,7 +33,7 @@ function App() {
     if (appstate.authorsReducer.authors.length < 1) {
       getAllAuthors();
     }
-  }, []);
+  }, [appstate.authorsReducer.authors.length]);
 
   // const renderMergedProps = (component, ...rest) => {
   // 	const finalProps = Object.assign({}, ...rest);

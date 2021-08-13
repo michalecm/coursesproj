@@ -19,6 +19,10 @@ export const postDeleteCourse = (id, token) => (dispatch) => {
 };
 
 export const postUpdateCourse = (id, courseData, token) => (dispatch) => {
+  // eslint-disable-next-line no-console
+  console.dir(courseData);
+  // eslint-disable-next-line no-console
+  console.dir(id + " " + token);
   APIService.Put(ENDPOINTS.PUT_COURSE_BY_ID, id, courseData, token)
     .then((res) => {
       dispatch(updateCourse(res.result));

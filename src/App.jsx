@@ -29,7 +29,7 @@ function App() {
     if (appstate.authorsReducer.authors.length < 1) {
       dispatch(getAllAuthors());
     }
-  }, [appstate.authorsReducer.authors.length]);
+  }, [dispatch, appstate.authorsReducer.authors.length]);
 
   // const renderMergedProps = (component, ...rest) => {
   // 	const finalProps = Object.assign({}, ...rest);

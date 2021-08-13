@@ -40,6 +40,7 @@ export default function CourseForm({ history }) {
       isFirstRun.current = false;
     } else {
       history.push("/courses");
+      isFirstRun.current = true;
     }
   }, [history, allCourses]);
 

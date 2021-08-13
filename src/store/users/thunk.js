@@ -32,7 +32,9 @@ export const postLogIn = (userData) => (dispatch) => {
     })
     .catch((err) => {
       // eslint-disable-next-line no-alert
-      alert("you are not logged in as admin");
+      alert("login failed");
+      // eslint-disable-next-line no-console
+      console.dir(err);
     });
 };
 

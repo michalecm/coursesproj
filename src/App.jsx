@@ -21,17 +21,13 @@ function App() {
 
   useEffect(() => {
     if (appstate.coursesReducer.courses.length < 1) {
-      APIService.Get(ENDPOINTS.GET_ALL_COURSES).then((courses) => {
-        // eslint-disable-next-line no-console
-        console.dir(courses);
-        dispatch(addCourses(courses));
-      });
+      //   getAllCourses();
     }
   }, [dispatch, appstate.coursesReducer.courses.length]);
 
   useEffect(() => {
     if (appstate.authorsReducer.authors.length < 1) {
-      getAllAuthors();
+      dispatch(getAllAuthors());
     }
   }, [appstate.authorsReducer.authors.length]);
 

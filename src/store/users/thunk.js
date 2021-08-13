@@ -16,7 +16,7 @@ export const postLogOut = (token) => (dispatch) => {
 };
 
 export const postLogIn = (userData) => (dispatch) => {
-  let data = { ...userData };
+  let data = {};
   APIService.Post(ENDPOINTS.POST_LOGIN, userData)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -24,9 +24,10 @@ export const postLogIn = (userData) => (dispatch) => {
       // eslint-disable-next-line no-console
       console.dir(data);
       data = {
-        ...res,
-        ...data,
+        token: res.result,
+        isAuth: res.successful,
         name: res.user.name ? res.user.name : "admin",
+        email: res.email,
       };
       localStorage.setItem("user", res.result);
       // eslint-disable-next-line no-console

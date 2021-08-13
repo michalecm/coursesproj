@@ -6,11 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link, useParams, matchPath, useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import APIService from '../../util/APIService';
 import './CourseForm.css';
-import { ENDPOINTS } from '../../util/consts';
-import { addCourse, updateCourse } from '../../store/courses/actionCreators';
 import { postAuthor, postDeleteAuthor } from '../../store/authors/thunk';
+import { postUpdateCourse, postAddCourse } from '../../store/courses/thunk';
 
 export default function CourseForm({ history }) {
 	const { id: slug } = useParams();
@@ -108,11 +106,11 @@ export default function CourseForm({ history }) {
 			alert('Please fill in a name for the author you are attemping to add');
 			return;
 		}
-		postAuthor({ name: newCourseData.authorField }, auth.token);
+		dispatch(postAuthor({ name: newCourseData.authorField }, auth.token));
 	}
 
 	function handleDeleteAuthor(id) {
-		postDeleteAuthor(id, auth.token);
+		dispatch(postDeleteAuthor(id, auth.token));
 	}
 
 	function handleCourseUpdate(event) {
@@ -132,31 +130,21 @@ export default function CourseForm({ history }) {
 			return;
 		}
 
-		APIService.Put(
-			ENDPOINTS.PUT_COURSE_BY_ID,
-			newCourseData.id,
-			{
-				title: newCourseData.title,
-				description: newCourseData.description,
-				creationDate: new Date().toLocaleDateString(),
-				duration: Number(newCourseData.duration),
-				authors: newCourseData.chosenAuthors.map((author) => author.id),
-				id: newCourseData.id,
-			},
-			auth.token
-		)
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log(res);
-				dispatch(updateCourse(res.result));
-				history.push('/courses');
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.log(err);
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+		dispatch(
+			postUpdateCourse(
+				newCourseData.id,
+				{
+					title: newCourseData.title,
+					description: newCourseData.description,
+					creationDate: new Date().toLocaleDateString(),
+					duration: Number(newCourseData.duration),
+					authors: newCourseData.chosenAuthors.map((author) => author.id),
+					id: newCourseData.id,
+				},
+				auth.token
+			)
+		);
+		history.push('/courses');
 	}
 
 	function handleCourseForm(event) {
@@ -175,30 +163,20 @@ export default function CourseForm({ history }) {
 			);
 			return;
 		}
-		APIService.Post(
-			ENDPOINTS.POST_ADD_COURSE,
-			{
-				title: newCourseData.title,
-				description: newCourseData.description,
-				creationDate: new Date().toLocaleDateString(),
-				duration: Number(newCourseData.duration),
-				authors: newCourseData.chosenAuthors.map((author) => author.id),
-				id: newCourseData.id,
-			},
-			auth.token
-		)
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log(res);
-				dispatch(addCourse(res.result));
-				history.push('/courses');
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.log(err);
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+		dispatch(
+			postAddCourse(
+				{
+					title: newCourseData.title,
+					description: newCourseData.description,
+					creationDate: new Date().toLocaleDateString(),
+					duration: Number(newCourseData.duration),
+					authors: newCourseData.chosenAuthors.map((author) => author.id),
+					id: newCourseData.id,
+				},
+				auth.token
+			)
+		);
+		history.push('/courses');
 	}
 
 	const authorsDivs = allAuthors.sort().map((author) => (

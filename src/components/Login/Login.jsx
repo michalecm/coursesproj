@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import { ENDPOINTS } from '../../util/consts';
 import { validateEmail } from '../../util/funcs';
-import { getRole, logIn } from '../../store/users/actionCreators';
 import './Login.css';
-import APIService from '../../util/APIService';
+import { postLogIn } from '../../store/users/thunk';
 
 export default function Login({ history }) {
 	const [loginState, setLoginState] = useState({
@@ -32,46 +30,14 @@ export default function Login({ history }) {
 			alert('Your password or email is invalid.');
 			return;
 		}
-		APIService.Post(ENDPOINTS.POST_LOGIN, {
-			email: loginState.email,
-			password: loginState.password,
-		})
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log(res.result);
-				localStorage.setItem('user', res.result);
-				dispatch(
-					logIn({
-						email: loginState.email,
-						name: res.user.name ? res.user.name : 'admin',
-						isAuth: res.successful,
-						token: res.result,
-					})
-				);
-				APIService.Get(
-					ENDPOINTS.GET_CURRENT_USER,
-					{},
-					localStorage.getItem('user')
-				)
-					.then((resp) => {
-						// eslint-disable-next-line no-console
-						console.log(resp);
-						// eslint-disable-next-line no-console
-						console.log(resp.role);
-						dispatch(getRole(resp.role));
-					})
-					.catch((err) => {
-						// eslint-disable-next-line no-alert
-						alert(
-							'Login failed: user does not exist or incorrect credentials.'
-						);
-					});
-				history.push('/courses');
+		dispatch(
+			postLogIn({
+				email: loginState.email,
+				password: loginState.password,
 			})
-			.catch((err) => {
-				// eslint-disable-next-line no-alert
-				alert('Login failed: user does not exist or incorrect credentials.');
-			});
+		);
+
+		history.push('/courses');
 	}
 
 	return (

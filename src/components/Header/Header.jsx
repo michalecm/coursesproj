@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../store/users/actionCreators';
+import { postLogOut } from '../../store/users/thunk';
 import Button from '../Button/Button';
 import Logo from '../Logo/Logo';
 import './Header.css';
@@ -9,9 +9,7 @@ export default function Header() {
 	const user = useSelector((state) => state.userReducer);
 	const dispatch = useDispatch();
 	function handleLogout() {
-		dispatch(logOut());
-		localStorage.removeItem('user');
-		window.location.replace('/login');
+		dispatch(postLogOut());
 	}
 
 	const userInfoHeader = user.isAuth ? (

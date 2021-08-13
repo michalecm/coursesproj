@@ -10,9 +10,6 @@ import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import CourseForm from './components/CourseForm/CourseForm';
 import CourseInfo from './components/CourseInfo/CourseInfo';
-import { ENDPOINTS } from './util/consts';
-import APIService from './util/APIService';
-import { addCourses } from './store/courses/actionCreators';
 import { getAllAuthors } from './store/authors/thunk';
 
 function App() {

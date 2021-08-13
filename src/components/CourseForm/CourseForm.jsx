@@ -285,7 +285,7 @@ export default function CourseForm({ history }) {
           <div className="create-course-title-button">
             <Button
               className="app-button"
-              text={isUpdating ? "Update Course" : "Create Course"}
+              text={isUpdating ? "Update" : "Create Course"}
               type="submit"
             />
           </div>

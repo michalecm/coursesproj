@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
@@ -34,8 +34,13 @@ export default function CourseForm({ history }) {
     id: uuidv4(),
   });
 
+  const isFirstRun = useRef(true);
   useEffect(() => {
-    history.push("/courses");
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+    } else {
+      history.push("/courses");
+    }
   }, [history, allCourses]);
 
   useEffect(() => {

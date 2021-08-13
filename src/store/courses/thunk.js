@@ -42,8 +42,8 @@ export const postAddCourse = (courseData, token) => (dispatch) => {
 
 export const getAllCourses = () => (dispatch) => {
   APIService.Get(ENDPOINTS.GET_ALL_COURSES)
-    .then((res) => {
-      dispatch(addCourses(res.result));
+    .then((courses) => {
+      dispatch(addCourses(courses));
     })
     .catch((err) => {
       // eslint-disable-next-line no-alert

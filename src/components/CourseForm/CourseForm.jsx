@@ -173,6 +173,7 @@ export default function CourseForm({ history }) {
       );
       return;
     }
+
     APIService.Put(
       ENDPOINTS.PUT_COURSE_BY_ID,
       newCourseData.id,

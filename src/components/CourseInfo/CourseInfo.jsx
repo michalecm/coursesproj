@@ -14,7 +14,7 @@ export default function CourseInfo() {
     let data = coursesList.courses.filter((course) => course.id === slug);
     [data] = data;
     setCourseData(data);
-  }, [coursesList]);
+  }, [coursesList, slug]);
 
   return !authorsList.isLoading && !coursesList.isLoading ? (
     <div className="course-info-wrapper">

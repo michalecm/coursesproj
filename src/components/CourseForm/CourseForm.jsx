@@ -175,6 +175,7 @@ export default function CourseForm({ history }) {
     }
     APIService.Put(
       ENDPOINTS.PUT_COURSE_BY_ID,
+      newCourseData.id,
       {
         title: newCourseData.title,
         description: newCourseData.description,

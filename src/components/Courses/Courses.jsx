@@ -20,15 +20,10 @@ export default function Courses() {
 			);
 		}
 	}
-	// // eslint-disable-next-line no-console
-	// console.log(allCourses.courses);
-	// // eslint-disable-next-line no-debugger
-	// debugger;
+
 	const courses =
 		!allCourses.isLoading && !allAuthors.isLoading
 			? searchResults.map((course, i) => (
-					// // eslint-disable-next-line no-debugger
-					// debugger;
 					<CourseCard
 						key={course.id}
 						id={course.id}

@@ -1,12 +1,13 @@
 import { React, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ENDPOINTS } from '../../util/consts';
 import { validateEmail } from '../../util/funcs';
 import Button from '../Button/Button';
 import './Registration.css';
-import APIService from '../../util/APIService';
+import { registerUser } from '../../store/users/thunk';
 
 export default function Registration({ history }) {
+	const dispatch = useDispatch();
 	const [registrationState, setRegistrationState] = useState({
 		name: '',
 		email: '',
@@ -44,18 +45,16 @@ export default function Registration({ history }) {
 			alert('Please enter a valid email address, name, and password.');
 			return;
 		}
-		APIService.Post(ENDPOINTS.POST_REGISTER, {
-			name: registrationState.name,
-			email: registrationState.email,
-			password: registrationState.password,
-		})
-			.then(() => {
-				history.push('/login');
+
+		dispatch(
+			registerUser({
+				name: registrationState.name,
+				email: registrationState.email,
+				password: registrationState.password,
 			})
-			.catch((err) => {
-				// eslint-disable-next-line no-alert
-				alert(`Registration failed: ${err}`);
-			});
+		);
+
+		history.push('/login');
 	}
 
 	return (

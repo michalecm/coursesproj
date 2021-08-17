@@ -91,7 +91,18 @@
   flex-direction: row;
 }
 
-.edit-delete-buttons > svg.icons {
+.edit-delete-buttons > svg.icons,
+.edit-delete-buttons > a > svg.icons {
   height: 1.5em;
   width: 1.5em;
+}
+
+.edit-delete-buttons > a,
+.edit-delete-buttons
+  > a:hover
+  .edit-delete-buttons
+  > a:visited
+  .edit-delete-buttons
+  > a:active {
+  text-decoration: none;
 }

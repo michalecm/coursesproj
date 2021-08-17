@@ -5,11 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import Button from '../Button/Button';
 import formatDuration, { getCourseAuthors } from '../../util/funcs';
-import { deleteCourse } from '../../store/courses/actionCreators';
-
+import { postDeleteCourse } from '../../store/courses/thunk';
 import './CourseCard.css';
-import APIService from '../../util/APIService';
-import { ENDPOINTS } from '../../util/consts';
 
 export default function CourseCard({
 	id,
@@ -23,22 +20,7 @@ export default function CourseCard({
 	const dispatch = useDispatch();
 
 	function handleDeleteCourse() {
-		APIService.DELETE(
-			ENDPOINTS.DELETE_COURSE_BY_ID,
-			id,
-			appstate.userReducer.token
-		)
-			.then((res) => {
-				if (res.successful) dispatch(deleteCourse(id));
-				else {
-					// eslint-disable-next-line no-console
-					console.log(res);
-				}
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+		dispatch(postDeleteCourse(id, appstate.userReducer.token));
 	}
 
 	return (
@@ -67,27 +49,17 @@ export default function CourseCard({
 					</div>
 				</div>
 				<div className='cc-button-icon-wrapper'>
-					<Link
-						to={{
-							pathname: `/courses/${id}`,
-							state: {
-								myData: {
-									id,
-									title,
-									description,
-									creationDate,
-									duration,
-									authors,
-								},
-							},
-						}}
-					>
+					<Link to={`/courses/${id}`}>
 						<Button text='Show course' />
 					</Link>
-					<div className='edit-delete-buttons'>
-						<MdDelete className='icons' onClick={handleDeleteCourse} />
-						<MdModeEdit className='icons' onClick={handleDeleteCourse} />
-					</div>
+					{appstate.userReducer.role === 'admin' && (
+						<div className='edit-delete-buttons'>
+							<MdDelete className='icons' onClick={handleDeleteCourse} />
+							<Link to={`/courses/update/${id}`}>
+								<MdModeEdit className='icons' />
+							</Link>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

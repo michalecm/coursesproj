@@ -4,85 +4,46 @@ import { BACKEND_URL } from './consts';
 export default class APIService {
 	static url = BACKEND_URL;
 
-	static data = {};
-
-	static Get(endpoint, queries = {}) {
-		if (
-			!(
-				queries &&
-				Object.keys(queries).length === 0 &&
-				queries.constructor === Object
-			)
-		) {
-			return new Promise((resolve, reject) => {
-				const payload = Object.assign(this.data, queries);
-				const esc = encodeURIComponent;
-				const query = Object.keys(payload)
-					.map((k) => `${esc(k)}=${esc(payload[k])}`)
-					.join('&');
-				try {
-					const response = axios
-						.get(`${this.url + endpoint}/?${query}`)
-						.then((res) => resolve(res.data.result))
-						.catch((err) => reject(err));
-					resolve(response);
-				} catch {
-					const response = 'failed to get';
-					reject(response);
-				}
-			});
-		}
-		return new Promise((resolve, reject) => {
-			try {
-				axios
-					.get(`${this.url + endpoint}`)
-					.then((res) => resolve(res.data.result))
-					.catch((err) => reject(err));
-			} catch {
-				const response = 'failed to get';
-				reject(response);
-			}
-		});
+	static Get(endpoint, queries = {}, token = '') {
+		const config = {
+			params: queries,
+			headers: { Authorization: token },
+		};
+		return axios
+			.get(`${this.url + endpoint}`, config)
+			.then((res) => (res.data ? res.data.result : res.result))
+			.catch((err) => err);
 	}
 
 	static Post(endpoint, rawdata = {}, token = '') {
-		return new Promise((resolve, reject) => {
-			try {
-				axios({
-					method: 'post',
-					url: `${this.url + endpoint}`,
-					data: rawdata,
-					headers: { Authorization: token },
-				})
-					.then((res) => {
-						resolve(res.data);
-					})
-					.catch((err) => {
-						reject(err);
-					});
-			} catch {
-				const response = 'failed to post';
-				reject(response);
-			}
-		});
+		return axios({
+			method: 'post',
+			url: `${this.url + endpoint}`,
+			data: rawdata,
+			headers: { Authorization: token },
+		})
+			.then((res) => res.data)
+			.catch((err) => err);
 	}
 
-	static DELETE(endpoint, specifier = '', token = '') {
-		return new Promise((resolve, reject) => {
-			try {
-				axios({
-					method: 'delete',
-					url: `${`${this.url + endpoint}/${specifier}`}`,
-					headers: { Authorization: token },
-				})
-					.then((res) => resolve(res.data))
-					.catch((err) => {
-						reject(err);
-					});
-			} catch {
-				const response = 'failed to delete';
-				reject(response);
-			}
-		});
+	static Put(endpoint, specifier = '', rawdata = {}, token = '') {
+		return axios({
+			method: 'put',
+			url: `${`${this.url + endpoint}/${specifier}`}`,
+			data: rawdata,
+			headers: { Authorization: token },
+		})
+			.then((res) => res.data)
+			.catch((err) => err);
+	}
+
+	static Delete(endpoint, specifier = '', token = '') {
+		return axios({
+			method: 'delete',
+			url: `${`${this.url + endpoint}/${specifier}`}`,
+			headers: { Authorization: token },
+		})
+			.then((res) => res.data)
+			.catch((err) => err);
 	}
 }

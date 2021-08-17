@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MdDelete } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
+import { Link, useParams, matchPath, useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import APIService from '../../util/APIService';
-import './CreateCourse.css';
-import { ENDPOINTS } from '../../util/consts';
-import { addCourse } from '../../store/courses/actionCreators';
-import { deleteAuthor, addAuthor } from '../../store/authors/actionCreators';
+import './CourseForm.css';
+import { postAuthor, postDeleteAuthor } from '../../store/authors/thunk';
+import { postUpdateCourse, postAddCourse } from '../../store/courses/thunk';
 
-export default function CreateCourse({ history }) {
+export default function CourseForm({ history }) {
+	const { id: slug } = useParams();
+
+	const currentPath = useLocation();
+	const isUpdating =
+		matchPath(currentPath.pathname, {
+			path: `/courses/update/${slug}`,
+			exact: true,
+			strict: true,
+		}) !== null;
+
 	const allAuthors = useSelector((state) => state.authorsReducer.authors);
+	const allCourses = useSelector((state) => state.coursesReducer.courses);
 	const auth = useSelector((state) => state.userReducer);
 	const dispatch = useDispatch();
 	const [newCourseData, setNewCourseData] = useState({
@@ -24,6 +33,43 @@ export default function CreateCourse({ history }) {
 		duration: 0,
 		id: uuidv4(),
 	});
+
+	const isFirstRun = useRef(true);
+	useEffect(() => {
+		if (isFirstRun.current) {
+			isFirstRun.current = false;
+		} else {
+			history.push('/courses');
+			isFirstRun.current = true;
+		}
+	}, [history, allCourses]);
+
+	useEffect(() => {
+		if (auth.role === 'admin' && isUpdating) {
+			let data = allCourses.filter((course) => course.id === slug);
+			if (!data.length > 0) {
+				history.push('/courses');
+			} else {
+				[data] = data;
+				// eslint-disable-next-line no-console
+				console.dir(data);
+				const updateAuthors = allAuthors.filter((a) =>
+					data.authors.includes(a.id)
+				);
+				// eslint-disable-next-line no-console
+				console.dir(updateAuthors);
+
+				setNewCourseData({
+					authorField: '',
+					chosenAuthors: updateAuthors,
+					title: data.title,
+					description: data.description,
+					duration: data.duration,
+					id: data.id,
+				});
+			}
+		}
+	}, [allCourses, allAuthors, auth.role, history, isUpdating, slug]);
 
 	function addAuthorToChosen(newAuthor) {
 		if (newCourseData.chosenAuthors.includes(newAuthor)) {
@@ -63,57 +109,21 @@ export default function CreateCourse({ history }) {
 		setNewCourseData({ ...newCourseData, duration: event.target.value });
 	}
 
-	function handleCreateAuthor() {
-		APIService.Post(
-			ENDPOINTS.POST_ADD_AUTHOR,
-			{ name: newCourseData.authorField },
-			auth.token
-		)
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log(res);
-				dispatch(
-					addAuthor({ name: newCourseData.authorField, id: res.result.id })
-				);
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.log(err);
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+	function handleCreateAuthor(event) {
+		event.preventDefault();
+		if (!newCourseData.authorField.length > 0) {
+			// eslint-disable-next-line no-alert
+			alert('Please fill in a name for the author you are attemping to add');
+			return;
+		}
+		dispatch(postAuthor({ name: newCourseData.authorField }, auth.token));
 	}
 
 	function handleDeleteAuthor(id) {
-		// eslint-disable-next-line no-console
-		console.log(id);
-		APIService.DELETE(ENDPOINTS.DELETE_AUTHOR_BY_ID, id, auth.token)
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log('test 2');
-				// eslint-disable-next-line no-console
-				console.log(res);
-				// eslint-disable-next-line no-console
-				console.log('res just printed');
-				if (res.successful !== false) {
-					// eslint-disable-next-line no-console
-					console.log(res);
-					// eslint-disable-next-line no-console
-					console.log('dispatching delete author');
-					dispatch(deleteAuthor(id));
-				}
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.log(err);
-				// eslint-disable-next-line no-console
-				console.log('we are in error territory');
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+		dispatch(postDeleteAuthor(id, auth.token));
 	}
 
-	function handleCreateCourse(event) {
+	function handleCourseUpdate(event) {
 		event.preventDefault();
 		if (
 			!(
@@ -129,30 +139,52 @@ export default function CreateCourse({ history }) {
 			);
 			return;
 		}
-		APIService.Post(
-			ENDPOINTS.POST_ADD_COURSE,
-			{
-				title: newCourseData.title,
-				description: newCourseData.description,
-				creationDate: new Date().toLocaleDateString(),
-				duration: Number(newCourseData.duration),
-				authors: newCourseData.chosenAuthors.map((author) => author.id),
-				id: newCourseData.id,
-			},
-			auth.token
-		)
-			.then((res) => {
-				// eslint-disable-next-line no-console
-				console.log(res);
-				dispatch(addCourse(res.result));
-				history.push('/courses');
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.log(err);
-				// eslint-disable-next-line no-alert
-				alert('you are not logged in as admin');
-			});
+
+		dispatch(
+			postUpdateCourse(
+				newCourseData.id,
+				{
+					title: newCourseData.title,
+					description: newCourseData.description,
+					creationDate: new Date().toLocaleDateString(),
+					duration: Number(newCourseData.duration),
+					authors: newCourseData.chosenAuthors.map((author) => author.id),
+					id: newCourseData.id,
+				},
+				auth.token
+			)
+		);
+	}
+
+	function handleCourseForm(event) {
+		event.preventDefault();
+		if (
+			!(
+				newCourseData.duration > 0 &&
+				newCourseData.title.length > 0 &&
+				newCourseData.description.length > 0 &&
+				newCourseData.chosenAuthors.length > 0
+			)
+		) {
+			// eslint-disable-next-line no-alert
+			alert(
+				'Please fill out all fields. Courses must have a duration and an author.'
+			);
+			return;
+		}
+		dispatch(
+			postAddCourse(
+				{
+					title: newCourseData.title,
+					description: newCourseData.description,
+					creationDate: new Date().toLocaleDateString(),
+					duration: Number(newCourseData.duration),
+					authors: newCourseData.chosenAuthors.map((author) => author.id),
+					id: newCourseData.id,
+				},
+				auth.token
+			)
+		);
 	}
 
 	const authorsDivs = allAuthors.sort().map((author) => (
@@ -178,7 +210,10 @@ export default function CreateCourse({ history }) {
 	));
 
 	return (
-		<form className='create-course-wrapper' onSubmit={handleCreateCourse}>
+		<form
+			className='create-course-wrapper'
+			onSubmit={isUpdating ? handleCourseUpdate : handleCourseForm}
+		>
 			<div className='backlink'>
 				<Link to='/courses'> &#60; Back to courses </Link>
 			</div>
@@ -194,7 +229,11 @@ export default function CreateCourse({ history }) {
 						/>
 					</div>
 					<div className='create-course-title-button'>
-						<Button className='app-button' text='Create Course' type='submit' />
+						<Button
+							className='app-button'
+							text={isUpdating ? 'Update' : 'Create Course'}
+							type='submit'
+						/>
 					</div>
 				</div>
 				<div className='create-course-description-wrapper'>
@@ -250,6 +289,6 @@ export default function CreateCourse({ history }) {
 	);
 }
 
-CreateCourse.propTypes = {
+CourseForm.propTypes = {
 	history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };

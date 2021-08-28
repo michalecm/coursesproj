@@ -1,8 +1,7 @@
 import { ADD_AUTHOR, ADD_AUTHORS, DELETE_AUTHOR } from './actionTypes';
 
 const authorsInitialState = {
-	authors: [], /// default value - empty array. After success getting courses from API - array of courses.
-	// See Swagger `/courses/all`.
+	authors: [],
 	isLoading: true,
 };
 

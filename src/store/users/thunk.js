@@ -19,10 +19,6 @@ export const postLogIn = (userData) => (dispatch) => {
 	let data = {};
 	APIService.Post(ENDPOINTS.POST_LOGIN, userData)
 		.then((res) => {
-			// eslint-disable-next-line no-console
-			console.dir(res);
-			// eslint-disable-next-line no-console
-			console.dir(data);
 			data = {
 				token: res.result,
 				isAuth: res.successful,
@@ -30,16 +26,13 @@ export const postLogIn = (userData) => (dispatch) => {
 				email: res.email,
 			};
 			localStorage.setItem('user', res.result);
-			// eslint-disable-next-line no-console
-			console.log(localStorage.getItem('user'));
+
 			dispatch(logIn(data));
 			dispatch(getUserRole());
 		})
 		.catch((err) => {
 			// eslint-disable-next-line no-alert
 			alert('login failed');
-			// eslint-disable-next-line no-console
-			console.dir(err);
 		});
 };
 

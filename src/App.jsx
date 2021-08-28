@@ -29,23 +29,6 @@ function App() {
 		}
 	}, [dispatch, appstate.authorsReducer.authors.length]);
 
-	// const renderMergedProps = (component, ...rest) => {
-	// 	const finalProps = Object.assign({}, ...rest);
-	// 	return React.createElement(component, finalProps);
-	// };
-
-	// const PropsRoute = ({ component, ...rest }) => (
-	// 	<Route
-	// 		/* eslint-disable react/jsx-props-no-spreading */
-	// 		{...rest}
-	// 		render={(routeProps) => renderMergedProps(component, routeProps, rest)}
-	// 	/>
-	// );
-
-	// PropsRoute.propTypes = {
-	// 	component: PropTypes.func.isRequired,
-	// };
-
 	return (
 		<Router>
 			<div className='App'>
@@ -53,8 +36,8 @@ function App() {
 				<Switch>
 					<PrivateRoute exact path='/courses' component={Courses} />
 					<Route path={['/', '/login']} exact component={Login} />
-					<PrivateRoute exact path='/courses/add' component={CourseForm} />
-					<PrivateRoute path='/register' exact component={Registration} />
+					<AdminRoute exact path='/courses/add' component={CourseForm} />
+					<Route path='/register' exact component={Registration} />
 					<PrivateRoute exact path='/courses/:id' component={CourseInfo} />
 					<AdminRoute exact path='/courses/update/:id' component={CourseForm} />
 				</Switch>

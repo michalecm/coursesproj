@@ -9,11 +9,11 @@ export default function Header() {
 	const user = useSelector((state) => state.userReducer);
 	const dispatch = useDispatch();
 	function handleLogout() {
-		dispatch(postLogOut());
+		dispatch(postLogOut(user.token));
 	}
 
 	const userInfoHeader = user.isAuth ? (
-		<div className='user-info-header'>
+		<div data-testid='header-username' className='user-info-header'>
 			<p>{user.name || ''}</p>
 		</div>
 	) : (
@@ -24,8 +24,7 @@ export default function Header() {
 			<Logo />
 			<div className='header-text-wrapper'>
 				{userInfoHeader}
-				{/* remove user login token */}
-				<Button text='Logout' onClick={handleLogout} />
+				{user.isAuth && <Button text='Logout' onClick={handleLogout} />}
 			</div>
 		</div>
 	);

@@ -46,18 +46,14 @@ export default function CourseForm({ history }) {
 
 	useEffect(() => {
 		if (auth.role === 'admin' && isUpdating) {
-			let data = allCourses.filter((course) => course.id === slug);
+			let data = allCourses.find((course) => course.id === slug);
 			if (!data.length > 0) {
 				history.push('/courses');
 			} else {
 				[data] = data;
-				// eslint-disable-next-line no-console
-				console.dir(data);
 				const updateAuthors = allAuthors.filter((a) =>
 					data.authors.includes(a.id)
 				);
-				// eslint-disable-next-line no-console
-				console.dir(updateAuthors);
 
 				setNewCourseData({
 					authorField: '',

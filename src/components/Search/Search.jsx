@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
@@ -6,6 +7,7 @@ import './Search.css';
 
 export default function Search(props) {
 	const [searchVal, setSearchVal] = useState('');
+	const user = useSelector((state) => state.userReducer);
 	function handleInputChange(e) {
 		setSearchVal(e.target.value);
 	}
@@ -25,9 +27,11 @@ export default function Search(props) {
 				/>
 				<input className='app-button' type='submit' value='Search' />
 			</form>
-			<Link to='/courses/add'>
-				<Button text='Add Course' />
-			</Link>
+			{user.role === 'admin' && (
+				<Link to='/courses/add'>
+					<Button text='Add Course' />
+				</Link>
+			)}
 		</div>
 	);
 }
